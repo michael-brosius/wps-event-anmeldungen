@@ -5,7 +5,7 @@
 .authbar{display:flex;gap:10px;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:14px}.authbar input{padding:8px;border:1px solid var(--line);border-radius:6px;min-width:260px}.password-wrap{position:relative;display:inline-flex;align-items:center}.password-wrap input{padding-right:40px}.password-toggle{position:absolute;right:7px;background:transparent!important;border:0!important;color:#53606d!important;padding:4px!important;min-width:0!important;cursor:pointer;font-size:18px;line-height:1}.password-toggle:hover{opacity:.7}.hidden{display:none!important}.setup{background:#fff3cd;border:1px solid #ead28a;border-radius:9px;padding:12px;margin-bottom:14px}.sync{font-size:12px;color:var(--muted)}
 .editbtn{padding:5px 9px;font-size:11px}.cancelled{opacity:.58;background:#fafafa}.status-cancelled{background:#fdecec;color:#9b2c2c}.modalback{position:fixed;inset:0;background:rgba(4,38,73,.48);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}.modal{background:#fff;border-radius:12px;width:min(900px,96vw);max-height:90vh;overflow:auto;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.25)}.modal h2{margin:0 0 15px}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.wide{grid-column:span 3}.field label{font-size:12px;font-weight:700;color:var(--muted)}.field input,.field select,.field textarea{padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit}.field textarea{min-height:75px;resize:vertical}.modalactions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}@media(max-width:700px){.formgrid{grid-template-columns:1fr}.field.wide{grid-column:span 1}}
 .invoice-check{width:17px;height:17px;accent-color:var(--navy);cursor:pointer}.invoice-cell{text-align:center}.invoice-amount{font-weight:700}.invoice-hint{font-size:12px;color:var(--muted)}
-</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 3.8</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
+</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 3.9</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
 <div id="setup" class="setup hidden"><b>Einrichtung erforderlich:</b> Bitte in <code>config.js</code> SUPABASE_URL und SUPABASE_PUBLISHABLE_KEY eintragen.</div>
 <div class="authbar"><div><strong>WPS Event-Team</strong> <span id="userLabel" class="sync">nicht angemeldet</span></div><div id="loginBox"><input id="loginEmail" type="email" placeholder="name@wps.de" autocomplete="username"><span class="password-wrap"><input id="loginPassword" type="password" placeholder="Passwort" autocomplete="current-password"><button type="button" id="passwordToggle" class="password-toggle" aria-label="Passwort anzeigen" title="Passwort anzeigen"><svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></span><button id="loginBtn">Anmelden</button></div><div id="logoutBox" class="hidden"><span id="syncState" class="sync">Synchronisiert</span> <button class="secondary" id="changePasswordBtn">Passwort ändern</button> <button class="secondary" id="logoutBtn">Abmelden</button></div></div>
 <div id="app" class="hidden">
@@ -44,7 +44,44 @@ let db=null,currentUser=null;
 function dbRow(r){let x={...r};delete x._new;return {identity_key:key(r),data:x,updated_at:new Date().toISOString()}}
 async function load(){if(!db||!currentUser)return;let {data,error}=await db.from('event_registrations').select('identity_key,data').order('updated_at',{ascending:true});if(error){$('status').textContent='Fehler beim Laden: '+error.message;return}rows=(data||[]).map(x=>x.data);render()}
 async function upsertRows(list){if(!list.length)return;let unique=new Map();for(let r of list){let k=key(r);if(!k||k==='||')continue;if(unique.has(k))unique.set(k,merge(unique.get(k),r));else unique.set(k,{...r})}let payload=[...unique.values()].map(dbRow);if(!payload.length)return;let {error}=await db.from('event_registrations').upsert(payload,{onConflict:'identity_key'});if(error)throw error}
-async function addFiles(fs){let added=0,merged=0,fail=0,changed=[];for(let f of fs){if(!f.name.toLowerCase().endsWith('.eml'))continue;try{let r=parseEML(await f.text(),f.name),k=key(r),i=rows.findIndex(x=>key(x)===k&&k!=='||');if(i>=0){rows[i]=merge(rows[i],r);changed.push(rows[i]);merged++}else{rows.push(r);changed.push(r);added++}}catch(e){fail++}}try{await upsertRows(changed);await load();$('status').textContent=`${added} neue Anmeldung(en), ${merged} Kopie/Dublette(n) zusammengeführt${fail?', '+fail+' Fehler':''}. Zentral synchronisiert.`}catch(e){$('status').textContent='Synchronisierung fehlgeschlagen: '+e.message}}
+function normMatch(v){return String(v||'').normalize('NFKC').trim().toLocaleLowerCase('de').replace(/\s+/g,' ')}
+function findImportMatch(r){
+  const exact=rows.findIndex(x=>key(x)===key(r)&&key(r)!=='||');
+  if(exact>=0)return exact;
+  const email=normMatch(r.email);
+  if(!email)return -1;
+  const candidates=rows.map((x,i)=>({x,i})).filter(o=>normMatch(o.x.email)===email);
+  // Gemeinsame Funktionspostfaecher duerfen niemals nur anhand der E-Mail zusammengefuehrt werden.
+  const compatible=candidates.filter(({x})=>(!r.first||!x.first||normMatch(r.first)===normMatch(x.first))&&(!r.last||!x.last||normMatch(r.last)===normMatch(x.last)));
+  return compatible.length===1&&candidates.length===1?compatible[0].i:-1;
+}
+function enrichFromMail(existing,incoming){
+  const result={...existing};
+  // Manuell gepflegte Anmeldungen, Entscheidungen und Veranstaltungsbuchungen bleiben unveraendert.
+  for(const field of ['street','no','zip','city','phone','title']){
+    if(!String(result[field]||'').trim()&&String(incoming[field]||'').trim())result[field]=incoming[field];
+  }
+  return result;
+}
+async function addFiles(fs){
+ let added=0,merged=0,fail=0,unchanged=0,changed=[];
+ for(const f of fs){if(!f.name.toLowerCase().endsWith('.eml'))continue;
+  try{
+   const r=parseEML(await f.text(),f.name),i=findImportMatch(r);
+   if(i>=0){
+    const before=rows[i],after=enrichFromMail(before,r);
+    if(JSON.stringify(after)!==JSON.stringify(before)){rows[i]=after;changed.push(after);merged++}else unchanged++;
+   }else{
+    // Keine riskante Zuordnung bei unterschiedlichen Namen oder geteilten E-Mail-Adressen.
+    const sameEmail=rows.some(x=>normMatch(x.email)&&normMatch(x.email)===normMatch(r.email));
+    if(sameEmail){unchanged++;continue}
+    rows.push(r);changed.push(r);added++;
+   }
+  }catch(e){console.error('Import:',e);fail++}
+ }
+ try{await upsertRows(changed);await load();$('status').textContent=`${added} neue Anmeldung(en), ${merged} bestehende Datensätze um fehlende Kontaktdaten ergänzt, ${unchanged} unverändert/unklar${fail?', '+fail+' Fehler':''}. Zentral synchronisiert.`}
+ catch(e){$('status').textContent='Synchronisierung fehlgeschlagen: '+e.message}
+}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function invoiceBase(r){return (r.workshop==='Ja'?75:0)+(r.conference==='Ja'?110:0)+(r.dinner==='Ja'?110:0)}
 function invoiceAmount(r){let n=Number(r.invoiceAmount);return r.invoiceAmount===undefined||r.invoiceAmount===null||r.invoiceAmount===''||!Number.isFinite(n)?invoiceBase(r):n}
