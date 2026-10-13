@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <!-- saved from url=(0070)file:///Users/michaelbrosius/Downloads/WPS_Event_Anmeldungen_v2_2.html -->
-<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WPS Event-Anmeldungen v4.3.12</title><style>
+<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WPS Event-Anmeldungen v4.3.13</title><style>
 :root{--navy:#042649;--cyan:#03C2CA;--bg:#f3f5f7;--line:#dce2e8;--muted:#6b7d90;--warn:#fff3cd;--good:#e8f7ef}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--navy)}header{background:var(--navy);color:#fff;padding:22px 28px}header h1{margin:0 0 4px;font-size:25px}header p{margin:0;color:#dbe5ee}main{max-width:1550px;margin:auto;padding:22px}.drop{background:#fff;border:2px dashed #9aabb9;border-radius:14px;padding:28px;text-align:center;cursor:pointer}.drop.over{border-color:var(--cyan);background:#eefcfd}.drop strong{font-size:19px}.drop small{display:block;color:var(--muted);margin-top:7px}input[type=file]{display:none}.actions,.filters{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.filters{background:#fff;padding:11px;border:1px solid var(--line);border-radius:9px}button{border:0;border-radius:6px;padding:9px 13px;font-weight:700;cursor:pointer;background:var(--cyan);color:#fff}button.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}button.danger{background:#fff;color:#a22;border:1px solid #e0b8b8}.cards{display:grid;grid-template-columns:repeat(11,minmax(105px,1fr));gap:9px;margin:14px 0}.card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px}.card b{display:block;font-size:23px}.card span{font-size:11px;color:var(--muted)}select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius:6px;background:#fff}.status{font-size:13px;color:var(--muted);margin:8px 0}.tablewrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:9px;max-height:59vh}table{border-collapse:collapse;width:100%;font-size:12.5px;white-space:nowrap}th,td{padding:8px 9px;border-bottom:1px solid #edf0f3;text-align:left}th{position:sticky;top:0;background:#edf3f6;z-index:2}tr.new{background:var(--good)}tr.dup{background:var(--warn)}td.note{max-width:260px;white-space:normal}.pill{display:inline-block;padding:3px 7px;border-radius:12px;background:#eaf7f8}.tag{font-size:11px;padding:2px 6px;border-radius:9px;background:#eef1f4}.help{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0;font-size:13px}.help b{color:var(--cyan)}@media(max-width:1000px){.cards{grid-template-columns:repeat(4,1fr)}}
 .authbar{display:flex;gap:10px;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:14px}.authbar input{padding:8px;border:1px solid var(--line);border-radius:6px;min-width:260px}.password-wrap{position:relative;display:inline-flex;align-items:center}.password-wrap input{padding-right:40px}.password-toggle{position:absolute;right:7px;background:transparent!important;border:0!important;color:#53606d!important;padding:4px!important;min-width:0!important;cursor:pointer;font-size:18px;line-height:1}.password-toggle:hover{opacity:.7}.hidden{display:none!important}.setup{background:#fff3cd;border:1px solid #ead28a;border-radius:9px;padding:12px;margin-bottom:14px}.sync{font-size:12px;color:var(--muted)}
 .editbtn{padding:5px 9px;font-size:11px}.cancelled{opacity:.58;background:#fafafa}.status-cancelled{background:#fdecec;color:#9b2c2c}.modalback{position:fixed;inset:0;background:rgba(4,38,73,.48);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}.modal{background:#fff;border-radius:12px;width:min(900px,96vw);max-height:90vh;overflow:auto;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.25)}.modal h2{margin:0 0 15px}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.wide{grid-column:span 3}.field label{font-size:12px;font-weight:700;color:var(--muted)}.field input,.field select,.field textarea{padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit}.field textarea{min-height:75px;resize:vertical}.modalactions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}@media(max-width:700px){.formgrid{grid-template-columns:1fr}.field.wide{grid-column:span 1}}
 .invoice-status{min-width:155px;font-size:12px}.invoice-status:disabled{opacity:.65}.invoice-check{width:17px;height:17px;accent-color:var(--navy);cursor:pointer}.invoice-cell{text-align:center}.invoice-amount{font-weight:700}.invoice-hint{font-size:12px;color:var(--muted)}
 th.sortable{cursor:pointer;user-select:none;white-space:nowrap}th.sortable:hover{background:#dcebf0}th.sortable:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}th.sortable .sort-arrow{margin-left:5px;color:#526b7f;font-size:12px}
 .stats-info{font-size:12px;color:var(--muted);margin:12px 0}.stats-section{margin:15px 0}.stats-section h2{font-size:15px;margin:0 0 8px;font-weight:700}.stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.stats-extra{grid-template-columns:repeat(4,minmax(0,1fr))}.metric{cursor:pointer;transition:border-color .15s,background .15s}.metric:hover,.metric:focus-visible{border-color:var(--cyan);background:#eefcfd;outline:2px solid transparent}.metric span{font-size:12px}@media(max-width:800px){.stats-grid,.stats-extra{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){.stats-grid,.stats-extra{grid-template-columns:1fr}}
-</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 4.3.12</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
+
+.import-review-item{border:1px solid var(--line);border-radius:8px;padding:12px;margin:12px 0;background:#fafcfd}.import-review-item h3{font-size:15px;margin:0 0 6px}.import-review-item small{color:var(--muted)}.import-review-item label{display:flex;align-items:center;gap:9px;padding:7px 2px;font-size:13px}.import-review-item input{width:17px;height:17px;accent-color:var(--navy)}.import-review-warning{color:#995e00;font-size:12px;margin-top:8px}
+</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 4.3.13</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
 <div id="setup" class="setup hidden"><b>Einrichtung erforderlich:</b> Bitte in <code>config.js</code> SUPABASE_URL und SUPABASE_PUBLISHABLE_KEY eintragen.</div>
 <div class="authbar"><div><strong>WPS Event-Team</strong> <span id="userLabel" class="sync">nicht angemeldet</span> <span id="roleLabel" class="tag hidden"></span></div><div id="loginBox"><input id="loginEmail" type="email" placeholder="name@wps.de" autocomplete="username"><span class="password-wrap"><input id="loginPassword" type="password" placeholder="Passwort" autocomplete="current-password"><button type="button" id="passwordToggle" class="password-toggle" aria-label="Passwort anzeigen" title="Passwort anzeigen"><svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></span><button id="loginBtn">Anmelden</button></div><div id="logoutBox" class="hidden"><span id="syncState" class="sync">Synchronisiert</span> <button class="secondary hidden" id="usersBtn">Benutzerverwaltung</button> <button class="secondary" id="changePasswordBtn">Passwort ändern</button> <button class="secondary" id="logoutBtn">Abmelden</button></div></div>
 <div id="app" class="hidden">
@@ -44,6 +46,7 @@ th.sortable{cursor:pointer;user-select:none;white-space:nowrap}th.sortable:hover
 <div class="help"><b>Speicherung:</b> Alle Teilnehmer werden zentral in Supabase gespeichert. Änderungen stehen damit allen angemeldeten Teammitgliedern zur Verfügung. „Backup sichern“ erzeugt weiterhin eine lokale JSON-Sicherungsdatei.</div>
 <div id="usersModal" class="modalback hidden"><div class="modal" style="width:min(760px,96vw)"><h2>Benutzerverwaltung</h2><p class="invoice-hint">Rollenänderungen gelten nach dem nächsten Laden bzw. Anmelden. Das eigene Administratorkonto kann nicht herabgestuft werden.</p><div id="usersList">Benutzer werden geladen …</div><div class="modalactions"><button class="secondary" id="usersClose">Schließen</button></div></div></div>
 <div id="passwordModal" class="modalback hidden"><div class="modal" style="width:min(520px,96vw)"><h2>Passwort ändern</h2><div class="formgrid" style="grid-template-columns:1fr"><div class="field"><label>Aktuelles Passwort</label><input id="pwCurrent" type="password" autocomplete="current-password"></div><div class="field"><label>Neues Passwort</label><input id="pwNew" type="password" autocomplete="new-password"></div><div class="field"><label>Neues Passwort wiederholen</label><input id="pwRepeat" type="password" autocomplete="new-password"></div></div><div class="modalactions"><button class="secondary" id="pwCancel">Abbrechen</button><button id="pwSave">Passwort ändern</button></div></div></div>
+<div id="importReviewModal" class="modalback hidden"><div class="modal" style="width:min(850px,96vw)"><h2>Änderungen aus Anmeldungen prüfen</h2><p class="invoice-hint">Bereits angemeldete Personen: Bitte die gewünschten Änderungen auswählen. Ohne Bestätigung bleiben vorhandene Buchungen und Essenswünsche unverändert. Manuelle Rechnungsentscheidungen bleiben geschützt.</p><div id="importReviewList"></div><div class="modalactions"><button id="importReviewCancel" class="secondary" type="button">Import abbrechen</button><button id="importReviewSkip" class="secondary" type="button">Ohne Änderungen fortfahren</button><button id="importReviewApply" type="button">Ausgewählte Änderungen übernehmen</button></div></div></div>
 <div id="editModal" class="modalback hidden"><div class="modal"><h2 id="editorTitle">Teilnehmer bearbeiten</h2><div class="formgrid">
 <div class="field"><label>Status</label><select id="e_status"><option>Angemeldet</option><option>Abgesagt</option></select></div><div class="field"><label>Anmeldung</label><input id="e_date"></div><div class="field"><label>Titel</label><input id="e_title"></div>
 <div class="field"><label>Vorname</label><input id="e_first"></div><div class="field"><label>Nachname</label><input id="e_last"></div><div class="field"><label>Firma</label><input id="e_company"></div>
@@ -69,7 +72,7 @@ function registrationFromSubject(subject){
  if(s.includes('anmeldung zur software@work 2026')||s.includes('anmeldung zum roads@work anwender-workshop'))return 'Newsletter';
  return '';
 }
-function parseEML(text,filename){let {doc,text:plain}=parseBody(text),p=pairs(doc),sub=utf8(decodeQP(header(text,'Subject'))),all=(sub+' '+plain).toLowerCase();let raw=all.includes('roads@work');let conferenceOnly=sub.toLowerCase().includes('anmeldung zur software@work konferenz');let d=get(p,'Teilnahme am Dinner am 05. November 2026','Teilnahme am Dinner am 5. November 2026','Teilnahme am Dinner');let c=get(p,'Teilnahme an der Konferenz am 06. November 2026','Teilnahme an der Konferenz am 6. November 2026','Teilnahme an der Konferenz');let w='Nein';for(let k of Object.keys(p))if(k.toLowerCase().includes('ich nehme am roads@work community workshop'))w=yn(p[k]);let conference=conferenceOnly?'Ja':yn(c);let confType=conferenceOnly?'vor Ort im Hotel Hafen Hamburg':(conference==='Ja'?clean(c):'');let company=get(p,'Firma / Institution','Firma');return {date:dateFrom(plain)||header(text,'Date'),source:'E-Mail',title:get(p,'Titel'),first:get(p,'Vorname'),last:get(p,'Nachname'),company,email:get(p,'E-Mail','Email'),phone:get(p,'Telefon'),workshop:w,dinner:conferenceOnly?'Nein':yn(d),meal:conferenceOnly?'':meal(d),conference,confType,street:get(p,'Strasse','Straße'),no:get(p,'Hausnummer'),zip:get(p,'Plz','PLZ'),city:get(p,'Ort'),note:get(p,'Ihre Nachricht','Nachricht'),registration:registrationFromSubject(sub),filename,internal:(company.trim().toLowerCase()==='wps'||get(p,'E-Mail','Email').trim().toLowerCase().endsWith('@wps.de'))?'Ja':'Nein',_new:true}}
+function parseEML(text,filename){let {doc,text:plain}=parseBody(text),p=pairs(doc),sub=utf8(decodeQP(header(text,'Subject'))),all=(sub+' '+plain).toLowerCase();let raw=all.includes('roads@work');let conferenceOnly=sub.toLowerCase().includes('anmeldung zur software@work konferenz');let d=get(p,'Teilnahme am Dinner am 05. November 2026','Teilnahme am Dinner am 5. November 2026','Teilnahme am Dinner');let c=get(p,'Teilnahme an der Konferenz am 06. November 2026','Teilnahme an der Konferenz am 6. November 2026','Teilnahme an der Konferenz');let w='Nein';for(let k of Object.keys(p))if(k.toLowerCase().includes('ich nehme am roads@work community workshop'))w=yn(p[k]);let conference=conferenceOnly?'Ja':yn(c);let submitted={workshop:Object.keys(p).some(k=>k.toLowerCase().includes('ich nehme am roads@work community workshop')),conference:conferenceOnly||!!c,dinner:!conferenceOnly&&!!d,meal:!conferenceOnly&&!!d&&yn(d)==='Ja'&&!!meal(d)};let confType=conferenceOnly?'vor Ort im Hotel Hafen Hamburg':(conference==='Ja'?clean(c):'');let company=get(p,'Firma / Institution','Firma');return {date:dateFrom(plain)||header(text,'Date'),source:'E-Mail',title:get(p,'Titel'),first:get(p,'Vorname'),last:get(p,'Nachname'),company,email:get(p,'E-Mail','Email'),phone:get(p,'Telefon'),workshop:w,dinner:conferenceOnly?'Nein':yn(d),meal:conferenceOnly?'':meal(d),conference,confType,street:get(p,'Strasse','Straße'),no:get(p,'Hausnummer'),zip:get(p,'Plz','PLZ'),city:get(p,'Ort'),note:get(p,'Ihre Nachricht','Nachricht'),registration:registrationFromSubject(sub),filename,_submitted:submitted,internal:(company.trim().toLowerCase()==='wps'||get(p,'E-Mail','Email').trim().toLowerCase().endsWith('@wps.de'))?'Ja':'Nein',_new:true}}
 function key(r){let e=(r.email||'').trim().toLowerCase(),f=(r.first||'').trim().toLowerCase(),l=(r.last||'').trim().toLowerCase();return e+'|'+f+'|'+l}
 function merge(a,b){for(let k of Object.keys(b)){if(k==='_new')continue;if((!a[k]||a[k]==='Nein')&&b[k]&&b[k]!=='Nein')a[k]=b[k]}a._new=true;return a}
 function addRow(r){let k=key(r),i=rows.findIndex(x=>key(x)===k&&k!=='||');if(i>=0){rows[i]=merge(rows[i],r);return false}rows.push(r);return true}
@@ -77,7 +80,7 @@ let db=null,currentUser=null,currentRole=null;let rowVersions=new Map();
 const canInvoice=()=>currentRole==='admin'||currentRole==='accounting';
 const isAdmin=()=>currentRole==='admin';
 const canEditParticipant=()=>currentRole==='admin'||currentRole==='event_team';
-function dbRow(r){let x={...r};delete x._new;return {identity_key:key(r),data:x,updated_at:new Date().toISOString()}}
+function dbRow(r){let x={...r};delete x._new;delete x._submitted;return {identity_key:key(r),data:x,updated_at:new Date().toISOString()}}
 async function load(){if(!db||!currentUser)return;let {data,error}=await db.from('event_registrations').select('identity_key,data,updated_at').order('updated_at',{ascending:true});if(error){$('status').textContent='Fehler beim Laden: '+error.message;return}rowVersions=new Map((data||[]).map(x=>[x.identity_key,x.updated_at]));rows=(data||[]).map(x=>x.data);render()}
 async function saveExisting(oldKey,updated,expectedVersion){
  const expected=expectedVersion===undefined?rowVersions.get(oldKey):expectedVersion;
@@ -107,32 +110,89 @@ function findImportMatch(r){
   return rows.findIndex(x=>normMatch(x.email)===email&&normMatch(x.first)===first&&normMatch(x.last)===last);
 }
 function enrichFromMail(existing,incoming){
-  const result={...existing};
-  // Manuell gepflegte Anmeldungen, Entscheidungen und Veranstaltungsbuchungen bleiben unveraendert.
-  for(const field of ['street','no','zip','city','phone','title']){
-    if(!String(result[field]||'').trim()&&String(incoming[field]||'').trim())result[field]=incoming[field];
-  }
-  return result;
+ const result={...existing};
+ // Nur leere Kontaktfelder ergänzen. Buchungen ausschließlich nach bestätigter Änderungsprüfung.
+ for(const field of ['street','no','zip','city','phone','title']){
+  if(!String(result[field]||'').trim()&&String(incoming[field]||'').trim())result[field]=incoming[field];
+ }
+ return result;
+}
+const importFieldLabels={workshop:'Workshop',conference:'Konferenz',dinner:'Dinner',meal:'Essenswunsch'};
+function importProposals(existing,incoming){
+ // Nur Felder aus dem tatsächlich eingereichten Formular prüfen; keine impliziten "Nein"-Werte übernehmen.
+ const submitted=incoming._submitted||{};
+ const fields=['workshop','conference','dinner','meal'];
+ return fields.filter(field=>submitted[field]&&String(existing[field]||'')!==String(incoming[field]||'')&&
+  (field!=='meal'||incoming.dinner==='Ja'))
+  .map(field=>({field,from:String(existing[field]||'—'),to:String(incoming[field]||'—')}));
+}
+function reviewImportChanges(candidates){
+ return new Promise(resolve=>{
+  const modal=$('importReviewModal'),list=$('importReviewList');
+  list.replaceChildren();
+  candidates.forEach((candidate,i)=>{
+   const box=document.createElement('div');box.className='import-review-item';
+   const h=document.createElement('h3');h.textContent=[candidate.before.first,candidate.before.last].join(' ')+' · '+candidate.before.email;box.appendChild(h);
+   const time=document.createElement('small');time.textContent='Vorhandene Anmeldung: '+(candidate.before.date||'ohne Datum')+' · Neue E-Mail: '+(candidate.incoming.date||'ohne Datum');box.appendChild(time);
+   for(const proposal of candidate.proposals){
+    const label=document.createElement('label'),check=document.createElement('input');check.type='checkbox';check.checked=true;check.dataset.candidate=String(i);check.dataset.field=proposal.field;
+    const text=document.createElement('span');text.textContent=importFieldLabels[proposal.field]+': '+proposal.from+' → '+proposal.to;
+    label.append(check,text);box.appendChild(label);
+   }
+   if(candidate.older){const warning=document.createElement('div');warning.className='import-review-warning';warning.textContent='Achtung: Diese E-Mail ist älter als die gespeicherte Anmeldung. Änderungen sind deshalb zunächst abgewählt.';box.appendChild(warning);box.querySelectorAll('input').forEach(x=>x.checked=false)}
+   if(candidate.unknownDate){const warning=document.createElement('div');warning.className='import-review-warning';warning.textContent='Das Datum konnte nicht eindeutig verglichen werden. Bitte Angaben besonders sorgfältig prüfen.';box.appendChild(warning);box.querySelectorAll('input').forEach(x=>x.checked=false)}
+   list.appendChild(box);
+  });
+  const done=choice=>{modal.classList.add('hidden');$('importReviewApply').onclick=null;$('importReviewSkip').onclick=null;$('importReviewCancel').onclick=null;resolve(choice)};
+  $('importReviewCancel').onclick=()=>done(null);
+  $('importReviewSkip').onclick=()=>done([]);
+  $('importReviewApply').onclick=()=>done([...list.querySelectorAll('input:checked')].map(el=>({index:Number(el.dataset.candidate),field:el.dataset.field})));
+  modal.classList.remove('hidden');
+ });
 }
 async function addFiles(fs){
  if(!isAdmin())return false;
- let added=0,merged=0,fail=0,unchanged=0,changed=[];
+ let added=0,merged=0,fail=0,unchanged=0,updated=0;
+ const planned=new Map(),candidates=[];
+ // Während der Prüfung nichts in rows oder Supabase verändern.
  for(const f of fs){if(!f.name.toLowerCase().endsWith('.eml'))continue;
   try{
-   const r=parseEML(await f.text(),f.name);
-    if(!normMatch(r.email)||!normMatch(r.first)||!normMatch(r.last)){fail++;continue}
-    const i=findImportMatch(r);
-   if(i>=0){
-    const before=rows[i],after=enrichFromMail(before,r);
-    if(JSON.stringify(after)!==JSON.stringify(before)){rows[i]=after;changed.push(after);merged++}else unchanged++;
-   }else{
-    // Verschiedene Personen duerfen dieselbe (zentrale) E-Mail-Adresse verwenden.
-    rows.push(r);changed.push(r);added++;
+   const incoming=parseEML(await f.text(),f.name);
+   if(!normMatch(incoming.email)||!normMatch(incoming.first)||!normMatch(incoming.last)){fail++;continue}
+   const k=key(incoming),i=findImportMatch(incoming);
+   if(i<0){
+    if(planned.has(k)){unchanged++;continue}
+    planned.set(k,{type:'new',row:incoming});added++;continue;
+   }
+   const before=planned.get(k)?.row||rows[i],after=enrichFromMail(before,incoming);
+   const proposals=importProposals(before,incoming);
+   if(JSON.stringify(after)!==JSON.stringify(before)){planned.set(k,{type:'existing',row:after});merged++}
+   else unchanged++;
+   if(proposals.length){
+    const previous=registrationTime(before.date),newer=registrationTime(incoming.date);
+    candidates.push({key:k,before,incoming,proposals,older:Number.isFinite(previous)&&Number.isFinite(newer)&&newer<previous,unknownDate:!Number.isFinite(previous)||!Number.isFinite(newer)});
    }
   }catch(e){console.error('Import:',e);fail++}
  }
- try{for(const r of changed){const k=key(r);if(rowVersions.has(k))await saveExisting(k,r);else await insertNewRow(r)}await load();$('status').textContent=`${added} neue Anmeldung(en), ${merged} bestehende Datensätze um fehlende Kontaktdaten ergänzt, ${unchanged} unverändert/unklar${fail?', '+fail+' Fehler':''}. Zentral synchronisiert.`;return fail===0}
- catch(e){$('status').textContent='Synchronisierung fehlgeschlagen (bitte neu laden und erneut importieren): '+e.message;return false}
+ if(candidates.length){
+  const choice=await reviewImportChanges(candidates);
+  if(choice===null){$('status').textContent='Import abgebrochen. Es wurden keine Änderungen gespeichert.';return false}
+  for(const {index,field} of choice){
+   const c=candidates[index];if(!c)continue;
+   const entry=planned.get(c.key)||{type:'existing',row:{...c.before}};
+   entry.row[field]=c.incoming[field];planned.set(c.key,entry);updated++;
+  }
+ }
+ try{
+  for(const [k,entry] of planned){
+   const row={...entry.row};delete row._submitted;
+   if(entry.type==='existing')await saveExisting(k,row);
+   else await insertNewRow(row);
+  }
+  await load();
+  $('status').textContent=`${added} neue Anmeldung(en), ${merged} mit ergänzten Kontaktdaten, ${updated} bestätigte Feldänderung(en), ${unchanged} unverändert/unklar${fail?', '+fail+' Fehler':''}. Zentral synchronisiert.`;
+  return fail===0;
+ }catch(e){await load();$('status').textContent='Synchronisierung fehlgeschlagen (bitte neu laden und erneut importieren): '+e.message;return false}
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function invoiceBase(r){return (r.workshop==='Ja'?75:0)+(r.conference==='Ja'?110:0)+(r.dinner==='Ja'?110:0)}
