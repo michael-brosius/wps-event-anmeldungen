@@ -11,7 +11,7 @@ th.sortable{cursor:pointer;user-select:none;white-space:nowrap}th.sortable:hover
 .import-review-item{border:1px solid var(--line);border-radius:8px;padding:12px;margin:12px 0;background:#fafcfd}.import-review-item h3{font-size:15px;margin:0 0 6px}.import-review-item small{color:var(--muted)}.import-review-item label{display:flex;align-items:center;gap:9px;padding:7px 2px;font-size:13px}.import-review-item input{width:17px;height:17px;accent-color:var(--navy)}.import-review-warning{color:#995e00;font-size:12px;margin-top:8px}
 .view-controls{display:flex;justify-content:flex-end;margin:10px 0 4px}.column-toolbar{position:relative;display:flex;align-items:center;gap:12px;margin:10px 0;flex-wrap:wrap}.column-summary{font-size:12px;color:var(--muted)}.column-picker{position:absolute;top:calc(100% + 5px);left:0;z-index:15;width:min(610px,calc(100vw - 55px));padding:15px;background:white;border:1px solid var(--line);border-radius:9px;box-shadow:0 8px 24px rgba(4,38,73,.16)}.column-picker-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.column-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.column-options label{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}.column-options input{accent-color:var(--navy)}.speaker-tag{background:#dff7f7;color:#07535a;font-weight:700}.column-close{background:transparent!important;color:var(--navy)!important;border:0!important;font-size:23px;line-height:1;padding:2px 7px}.column-hidden{display:none!important}@media(max-width:600px){.column-options{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .allergy-alert{color:#b42318;font-weight:700;display:inline-flex;align-items:center;gap:5px;white-space:normal}.credit-warning{color:#b42318;font-weight:700;display:inline-block;white-space:normal}.credit-review-card{border-color:#e6b3ae!important;background:#fff7f6!important}.credit-review-card b{color:#b42318}.credit-done{color:#167447;font-weight:700}
-</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 4.3.21</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
+</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 4.3.23</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
 <div id="setup" class="setup hidden"><b>Einrichtung erforderlich:</b> Bitte in <code>config.js</code> SUPABASE_URL und SUPABASE_PUBLISHABLE_KEY eintragen.</div>
 <div class="authbar"><div><strong>WPS Event-Team</strong> <span id="userLabel" class="sync">nicht angemeldet</span> <span id="roleLabel" class="tag hidden"></span></div><div id="loginBox"><input id="loginEmail" type="email" placeholder="name@wps.de" autocomplete="username"><span class="password-wrap"><input id="loginPassword" type="password" placeholder="Passwort" autocomplete="current-password"><button type="button" id="passwordToggle" class="password-toggle" aria-label="Passwort anzeigen" title="Passwort anzeigen"><svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></span><button id="loginBtn">Anmelden</button></div><div id="logoutBox" class="hidden"><span id="syncState" class="sync">Synchronisiert</span> <button class="secondary hidden" id="usersBtn">Benutzerverwaltung</button> <button class="secondary" id="changePasswordBtn">Passwort ändern</button> <button class="secondary" id="logoutBtn">Abmelden</button></div></div>
 <div id="app" class="hidden">
@@ -20,7 +20,7 @@ th.sortable{cursor:pointer;user-select:none;white-space:nowrap}th.sortable:hover
 <div id="importPanel"><div class="help"><b>OneDrive-Import (Admin):</b> Neue Anmeldungen aus dem synchronisierten OneDrive-Ordner einlesen und zentral speichern.</div><div class="actions"><button id="chooseOneDrive" type="button">OneDrive-Ordner auswählen</button><button id="readOneDrive" type="button" disabled>Neue Anmeldungen importieren</button><span id="oneDriveState" class="status">Noch kein Ordner ausgewählt.</span></div><div class="drop" id="drop"><strong>.eml-Dateien hier hineinziehen</strong><small>Mehrere Dateien gleichzeitig möglich · Veranstalter-Mail und Teilnehmerkopie werden automatisch zusammengeführt</small></div><input id="emlInput" type="file" accept=".eml,message/rfc822" multiple="">
 <div class="actions"><button class="secondary" id="backup">Backup sichern</button><button class="secondary" id="restoreBtn">Backup einlesen</button><input id="restoreInput" type="file" accept=".json"><button class="danger" id="clear">Alles löschen</button></div>
 </div>
-<div class="actions"><button id="export" type="button">CSV für Excel exportieren</button></div>
+<div class="actions"><button id="exportXlsx" type="button">Excel exportieren (.xlsx)</button><button id="export" class="secondary hidden" type="button">CSV für Excel exportieren (Admin)</button></div>
 <div class="status" id="status">Daten werden nach Anmeldung geladen.</div>
 <div class="view-controls"><button id="toggleStats" class="secondary" type="button" aria-expanded="true" aria-controls="statsPanel">Kennzahlen ausblenden</button></div>
 <div id="statsPanel">
@@ -65,6 +65,7 @@ th.sortable{cursor:pointer;user-select:none;white-space:nowrap}th.sortable:hover
 <div id="invoiceEditFields" class="field wide"><label for="e_invoiceStatus">Rechnungsstatus</label><select id="e_invoiceStatus"><option value="Offen">Offen</option><option value="Rechnung vorgesehen">Rechnung vorgesehen</option><option value="Rechnung versendet">Rechnung versendet</option><option value="Rechnung bezahlt">Rechnung bezahlt</option><option value="Gutschrift erstellt">Gutschrift erstellt</option><option value="Keine Rechnung">Keine Rechnung</option></select><label for="e_invoiceAmount">Rechnungsbetrag (€)</label><input id="e_invoiceAmount" type="number" min="0" step="0.01" inputmode="decimal"><span class="invoice-hint" id="invoiceHint"></span><div id="invoiceHistory"></div></div><div class="field wide"><label>Anmerkungen</label><textarea id="e_note"></textarea></div></div><div class="modalactions"><button class="danger" id="editDelete" style="margin-right:auto">Teilnehmer löschen</button><button class="secondary" id="editCancel">Abbrechen</button><button id="editSave">Änderungen speichern</button></div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 <script>
 const SEED=[]; let rows=[]; const $=id=>document.getElementById(id); const clean=s=>(s||'').replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim();
 function decodeQP(s){return s.replace(/=\r?\n/g,'').replace(/=([A-Fa-f0-9]{2})/g,(_,h)=>String.fromCharCode(parseInt(h,16)))}function utf8(s){try{return decodeURIComponent(escape(s))}catch(e){return s}}
@@ -444,7 +445,45 @@ $('editSave').onclick=async()=>{
  catch(e){alert('Änderung konnte nicht gespeichert werden: '+e.message)}
  finally{$('editSave').disabled=false}
 };
-function csv(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}$('export').onclick=()=>{let heads=['Status','Anmeldung','Titel','Vorname','Nachname','Firma','E-Mail','Telefon','r@w Workshop','s@w Konferenz','Dinner','Vortrag','Allergie','Essenswunsch','WPS intern','Rechnungsstatus','Rechnung vorgesehen','Rechnungsbetrag EUR','Gutschrift','Anmeldung über','Straße','Hausnummer','PLZ','Ort','Anmerkungen','Quelle'];let ks=['status','date','title','first','last','company','email','phone','workshop','conference','dinner','speaker','allergy','meal','internal','invoiceStatus','invoicePlanned','invoiceAmount','creditHint','registration','street','no','zip','city','note','filename'];let out=[heads.map(csv).join(';'),...filtered().map(r=>ks.map(k=>csv(k==='speaker'?(r.speaker==='Ja'?'Ja':'Nein'):k==='invoiceStatus'?invoiceStatusForDisplay(r):k==='creditHint'?creditHint(r):k==='invoicePlanned'?(r.internal==='Ja'?'':hasDisplayedInvoice(r)?'Ja':'Nein'):k==='invoiceAmount'?(r.internal==='Ja'||!hasDisplayedInvoice(r)?'':invoiceAmount(r).toFixed(2).replace('.',',')):(r[k]??(k==='status'?participantStatus(r):'')))).join(';'))].join('\r\n');download(new Blob(['\ufeff'+out],{type:'text/csv;charset=utf-8'}),'WPS_Event_Anmeldungen.csv')};function download(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+function excelSafeHouseNumber(v){let s=String(v??'');return /^\s*\d+\s*[-–]\s*\d+\s*$/.test(s)?'\t'+s:s} function csv(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}$('export').onclick=()=>{if(!isAdmin())return;let heads=['Status','Anmeldung','Titel','Vorname','Nachname','Firma','E-Mail','Telefon','r@w Workshop','s@w Konferenz','Dinner','Vortrag','Allergie','Essenswunsch','WPS intern','Rechnungsstatus','Rechnung vorgesehen','Rechnungsbetrag EUR','Gutschrift','Anmeldung über','Straße','Hausnummer','PLZ','Ort','Anmerkungen','Quelle'];let ks=['status','date','title','first','last','company','email','phone','workshop','conference','dinner','speaker','allergy','meal','internal','invoiceStatus','invoicePlanned','invoiceAmount','creditHint','registration','street','no','zip','city','note','filename'];let out=[heads.map(csv).join(';'),...filtered().map(r=>ks.map(k=>csv(k==='no' ? excelSafeHouseNumber(r.no) : k==='speaker'?(r.speaker==='Ja'?'Ja':'Nein'):k==='invoiceStatus'?invoiceStatusForDisplay(r):k==='creditHint'?creditHint(r):k==='invoicePlanned'?(r.internal==='Ja'?'':hasDisplayedInvoice(r)?'Ja':'Nein'):k==='invoiceAmount'?(r.internal==='Ja'||!hasDisplayedInvoice(r)?'':invoiceAmount(r).toFixed(2).replace('.',',')):(r[k]??(k==='status'?participantStatus(r):'')))).join(';'))].join('\r\n');download(new Blob(['\ufeff'+out],{type:'text/csv;charset=utf-8'}),'WPS_Event_Anmeldungen.csv')};// XLSX exportiert ausschließlich die aktuell gefilterten Teilnehmer, ohne Datenbankänderung.
+$('exportXlsx').onclick=async()=>{
+ const btn=$('exportXlsx');
+ if(!currentUser||!currentRole)return;
+ if(!window.ExcelJS){alert('Excel-Export konnte nicht geladen werden. Bitte Internetverbindung prüfen und Seite neu laden.');return}
+ btn.disabled=true;
+ try{
+  const heads=['Status','Anmeldung','Titel','Vorname','Nachname','Firma','E-Mail','Telefon','r@w Workshop','s@w Konferenz','Dinner','Vortrag','Allergie','Essenswunsch','WPS intern','Rechnungsstatus','Rechnung vorgesehen','Rechnungsbetrag EUR','Gutschrift','Anmeldung über','Straße','Hausnummer','PLZ','Ort','Anmerkungen','Quelle'];
+  const ks=['status','date','title','first','last','company','email','phone','workshop','conference','dinner','speaker','allergy','meal','internal','invoiceStatus','invoicePlanned','invoiceAmount','creditHint','registration','street','no','zip','city','note','filename'];
+  const book=new ExcelJS.Workbook();book.creator='WPS Event-Anmeldungen';
+  const sheet=book.addWorksheet('Teilnehmer',{views:[{state:'frozen',ySplit:1}]});
+  sheet.addRow(heads);
+  const header=sheet.getRow(1);header.height=29;
+  header.eachCell(c=>{c.font={bold:true,color:{argb:'FFFFFFFF'}};c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF092D4A'}};c.alignment={horizontal:'left',vertical:'middle',wrapText:true};});
+  for(const r of filtered()){
+   const values=ks.map(k=>{
+    if(k==='speaker')return r.speaker==='Ja'?'Ja':'Nein';
+    if(k==='invoiceStatus')return invoiceStatusForDisplay(r);
+    if(k==='creditHint')return creditHint(r);
+    if(k==='invoicePlanned')return r.internal==='Ja'?'':hasDisplayedInvoice(r)?'Ja':'Nein';
+    if(k==='invoiceAmount')return r.internal==='Ja'||!hasDisplayedInvoice(r)?null:invoiceAmount(r);
+    if(k==='status')return participantStatus(r);
+    return String(r[k]??'');
+   });
+   const row=sheet.addRow(values);
+   row.eachCell({includeEmpty:true},(c,col)=>{
+    c.alignment={horizontal:col===18?'right':'left',vertical:'middle'};
+    if(col===18&&typeof c.value==='number')c.numFmt='#,##0.00 "€"';
+    if(row.number%2===0)c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFF0F6F8'}};
+   });
+  }
+  sheet.columns.forEach((col,i)=>{col.width=Math.min(46,Math.max(14,heads[i].length+4));});
+  sheet.getColumn(7).width=32;sheet.getColumn(25).width=40;
+  sheet.autoFilter={from:{row:1,column:1},to:{row:Math.max(1,sheet.rowCount),column:heads.length}};
+  const buffer=await book.xlsx.writeBuffer();
+  download(new Blob([buffer],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),'WPS_Event_Anmeldungen.xlsx');
+ }catch(err){console.error('XLSX-Export:',err);alert('Excel-Export fehlgeschlagen: '+err.message)}finally{btn.disabled=false}
+};
+function download(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
 $('backup').onclick=()=>download(new Blob([JSON.stringify(rows,null,2)],{type:'application/json'}),'WPS_Event_Anmeldungen_Backup.json');$('restoreBtn').onclick=()=>{if(!isAdmin())return;$('restoreInput').click()};$('restoreInput').onchange=async e=>{if(!isAdmin())return;try{let imported=JSON.parse(await e.target.files[0].text());if(!Array.isArray(imported))throw new Error('Ungültiges Backup');await upsertRows(imported);await load();$('status').textContent='Backup in die zentrale Datenbank übernommen.'}catch(x){alert('Backup konnte nicht übernommen werden: '+x.message)}};$('clear').onclick=async()=>{if(!isAdmin())return;if(confirm('Wirklich ALLE Teilnehmer zentral löschen? Dies betrifft alle Benutzer.')){let {error}=await db.from('event_registrations').delete().neq('identity_key','__never__');if(error)alert(error.message);else{rows=[];render()}}};
 ['search','statusFilter','workshopFilter','confFilter','speakerFilter','dinnerFilter','allergyFilter','internalFilter','registrationFilter','creditFilter','invoiceStatusFilter','invoiceFilter'].forEach(id=>$(id).addEventListener('input',render));let drop=$('drop'),inp=$('emlInput');drop.onclick=()=>{if(isAdmin())inp.click()};inp.onchange=e=>{if(isAdmin())addFiles(e.target.files);e.target.value=''};['dragenter','dragover'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.add('over')}));['dragleave','drop'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.remove('over')}));drop.addEventListener('drop',e=>{if(isAdmin())addFiles(e.dataTransfer.files)});
 
@@ -489,7 +528,7 @@ async function applySession(session){
  if(error||!data?.role){$('app').classList.add('hidden');$('userLabel').textContent+=' · Rolle fehlt / nicht lesbar';return}
  currentRole=data.role;
  $('roleLabel').textContent=({admin:'Administrator',accounting:'Buchhaltung',event_team:'Event-Team'})[currentRole]||currentRole;
- $('app').classList.remove('hidden');$('roleLabel').classList.remove('hidden');$('usersBtn').classList.add('hidden');updateImportVisibility();$('addParticipant').classList.toggle('hidden',!isAdmin());
+ $('app').classList.remove('hidden');$('roleLabel').classList.remove('hidden');$('usersBtn').classList.add('hidden');$('export').classList.toggle('hidden',!isAdmin());updateImportVisibility();$('addParticipant').classList.toggle('hidden',!isAdmin());
  ['restoreBtn','clear'].forEach(id=>$(id).classList.toggle('hidden',!isAdmin()));
  await load();
 }
