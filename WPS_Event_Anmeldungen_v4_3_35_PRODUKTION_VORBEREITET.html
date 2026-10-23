@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)file:///Users/michaelbrosius/Downloads/WPS_Event_Anmeldungen_v2_2.html -->
+<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WPS Event-Anmeldungen v4.3.35</title><style>
+:root{--navy:#042649;--cyan:#03C2CA;--bg:#f3f5f7;--line:#dce2e8;--muted:#6b7d90;--warn:#fff3cd;--good:#e8f7ef}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--navy)}header{background:var(--navy);color:#fff;padding:22px 28px}header h1{margin:0 0 4px;font-size:25px}header p{margin:0;color:#dbe5ee}main{max-width:1550px;margin:auto;padding:22px}.drop{background:#fff;border:2px dashed #9aabb9;border-radius:14px;padding:28px;text-align:center;cursor:pointer}.drop.over{border-color:var(--cyan);background:#eefcfd}.drop strong{font-size:19px}.drop small{display:block;color:var(--muted);margin-top:7px}input[type=file]{display:none}.actions,.filters{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.filters{background:#fff;padding:11px;border:1px solid var(--line);border-radius:9px}button{border:0;border-radius:6px;padding:9px 13px;font-weight:700;cursor:pointer;background:var(--cyan);color:#fff}button.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}button.danger{background:#fff;color:#a22;border:1px solid #e0b8b8}.cards{display:grid;grid-template-columns:repeat(11,minmax(105px,1fr));gap:9px;margin:14px 0}.card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px}.card b{display:block;font-size:23px}.card span{font-size:11px;color:var(--muted)}select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius:6px;background:#fff}.status{font-size:13px;color:var(--muted);margin:8px 0}.tablewrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:9px;max-height:59vh}table{border-collapse:collapse;width:100%;font-size:12.5px;white-space:nowrap}th,td{padding:8px 9px;border-bottom:1px solid #edf0f3;text-align:left}th{position:sticky;top:0;background:#edf3f6;z-index:2}tr.new{background:var(--good)}tr.dup{background:var(--warn)}td.note{max-width:260px;white-space:normal}.pill{display:inline-block;padding:3px 7px;border-radius:12px;background:#eaf7f8}.tag{font-size:11px;padding:2px 6px;border-radius:9px;background:#eef1f4}.help{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0;font-size:13px}.help b{color:var(--cyan)}@media(max-width:1000px){.cards{grid-template-columns:repeat(4,1fr)}}
+.authbar{display:flex;gap:10px;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:14px}.authbar input{padding:8px;border:1px solid var(--line);border-radius:6px;min-width:260px}.password-wrap{position:relative;display:inline-flex;align-items:center}.password-wrap input{padding-right:40px}.password-toggle{position:absolute;right:7px;background:transparent!important;border:0!important;color:#53606d!important;padding:4px!important;min-width:0!important;cursor:pointer;font-size:18px;line-height:1}.password-toggle:hover{opacity:.7}.hidden{display:none!important}.setup{background:#fff3cd;border:1px solid #ead28a;border-radius:9px;padding:12px;margin-bottom:14px}.sync{font-size:12px;color:var(--muted)}
+.editbtn{padding:5px 9px;font-size:11px}.cancelled{opacity:.58;background:#fafafa}.status-cancelled{background:#fdecec;color:#9b2c2c}.modalback{position:fixed;inset:0;background:rgba(4,38,73,.48);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}.modal{background:#fff;border-radius:12px;width:min(900px,96vw);max-height:90vh;overflow:auto;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.25)}.modal h2{margin:0 0 15px}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.wide{grid-column:span 3}.field label{font-size:12px;font-weight:700;color:var(--muted)}.field input,.field select,.field textarea{padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit}.field textarea{min-height:75px;resize:vertical}.modalactions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}@media(max-width:700px){.formgrid{grid-template-columns:1fr}.field.wide{grid-column:span 1}}
+.invoice-audit{max-width:330px;white-space:normal;margin-top:5px}.invoice-audit details{font-size:11px;margin-top:4px}.invoice-audit ol{padding-left:17px}.invoice-status{min-width:155px;font-size:12px}.invoice-status:disabled{opacity:.65}.invoice-check{width:17px;height:17px;accent-color:var(--navy);cursor:pointer}.invoice-cell{text-align:center}.invoice-amount{font-weight:700}.invoice-hint{font-size:12px;color:var(--muted)}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}th.sortable:hover{background:#dcebf0}th.sortable:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}th.sortable .sort-arrow{margin-left:5px;color:#526b7f;font-size:12px}
+.stats-info{font-size:12px;color:var(--muted);margin:12px 0}.stats-section{margin:15px 0}.stats-section h2{font-size:15px;margin:0 0 8px;font-weight:700}.stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.stats-extra{grid-template-columns:repeat(4,minmax(0,1fr))}.metric{cursor:pointer;transition:border-color .15s,background .15s}.metric:hover,.metric:focus-visible{border-color:var(--cyan);background:#eefcfd;outline:2px solid transparent}.metric span{font-size:12px}@media(max-width:800px){.stats-grid,.stats-extra{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){.stats-grid,.stats-extra{grid-template-columns:1fr}}
+
+.import-review-item{border:1px solid var(--line);border-radius:8px;padding:12px;margin:12px 0;background:#fafcfd}.import-review-item h3{font-size:15px;margin:0 0 6px}.import-review-item small{color:var(--muted)}.import-review-item label{display:flex;align-items:center;gap:9px;padding:7px 2px;font-size:13px}.import-review-item input{width:17px;height:17px;accent-color:var(--navy)}.import-review-warning{color:#995e00;font-size:12px;margin-top:8px}
+.view-controls{display:flex;justify-content:flex-end;margin:10px 0 4px}.column-toolbar{position:relative;display:flex;align-items:center;gap:12px;margin:10px 0;flex-wrap:wrap}.column-summary{font-size:12px;color:var(--muted)}.column-picker{position:absolute;top:calc(100% + 5px);left:0;z-index:15;width:min(610px,calc(100vw - 55px));padding:15px;background:white;border:1px solid var(--line);border-radius:9px;box-shadow:0 8px 24px rgba(4,38,73,.16)}.column-picker-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.column-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.column-options label{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer}.column-options input{accent-color:var(--navy)}.speaker-tag{background:#dff7f7;color:#07535a;font-weight:700}.column-close{background:transparent!important;color:var(--navy)!important;border:0!important;font-size:23px;line-height:1;padding:2px 7px}.column-hidden{display:none!important}@media(max-width:600px){.column-options{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.allergy-alert{color:#b42318;font-weight:700;display:inline-flex;align-items:center;gap:5px;white-space:normal}.credit-warning{color:#b42318;font-weight:700;display:inline-block;white-space:normal}.credit-review-card{border-color:#e6b3ae!important;background:#fff7f6!important}.credit-review-card b{color:#b42318}.credit-done{color:#167447;font-weight:700}
+.mail-panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px;margin:14px 0}.mail-panel h2{margin:0 0 8px;font-size:17px}.mail-panel p{font-size:12px;color:var(--muted)}.mail-compose textarea,.mail-compose input{width:100%;border:1px solid var(--line);border-radius:6px;padding:10px;font:inherit}.mail-compose textarea{min-height:245px;resize:vertical}.mail-compose label{display:block;font-size:12px;font-weight:bold;margin:12px 0 5px}.mail-compose pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f5f7;border-radius:7px;padding:12px;font:13px/1.5 Arial,sans-serif}.mail-action{font-size:11px;padding:6px 9px;white-space:nowrap}.mail-action.sent{background:#e4f6eb!important;color:#116a3c!important;border:1px solid #9ed9b6!important;font-weight:700}.mail-action.sent:hover{background:#d0efdc!important}.mail-sent{color:#167447;font-weight:bold}.mail-pending{color:#9b5c16} 
+/* Teilnehmereditor: Kopf und Aktionen bleiben sichtbar, nur Felder scrollen. */
+#editModal .editor-modal{display:flex;flex-direction:column;max-height:calc(100dvh - 40px);overflow:hidden;padding:0;min-height:0}
+#editModal .editor-modal>h2{flex:none;margin:0;padding:20px 20px 14px;background:#fff}
+#editModal .editor-modal>.formgrid{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:4px 20px 20px;align-content:start}
+#editModal .editor-modal>.modalactions{flex:none;margin:0;padding:13px 20px;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap}
+@media(max-width:700px){#editModal{padding:10px}#editModal .editor-modal{max-height:calc(100dvh - 20px)}#editModal .editor-modal>.modalactions{gap:6px;padding:10px}#editModal .editor-modal>.modalactions button{padding:8px}}
+
+.checkin-panel{background:white;border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0}.checkin-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.checkin-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}.checkin-controls input{min-width:240px;flex:1}.checkin-metrics{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.checkin-metrics .card{min-width:130px}.checkin-table{max-height:55vh}.checkin-action{min-width:110px}.checkin-action.done{background:#e4f6eb;color:#116a3c;border:1px solid #9ed9b6}.checkin-error{color:#b42318;font-weight:bold}.checkin-row-done{background:#edf9f1}.checkin-row-done td{border-bottom-color:#d7eddf}.checkin-time{display:block;font-size:11px;color:#53705f;margin-top:4px}.checkin-action:disabled{opacity:.55;cursor:wait}
+
+.badge-panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;margin:16px 0}.badge-panel h2{margin:0 0 7px}.badge-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}.badge-controls input[type=search]{min-width:240px;flex:1}.badge-list{max-height:330px;overflow:auto;border:1px solid var(--line);border-radius:8px}.badge-item{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px solid #edf0f3}.badge-item input{width:17px;height:17px;accent-color:var(--navy)}.badge-item small{color:var(--muted)}.badge-tag{font-size:10px;font-weight:700;border-radius:4px;padding:3px 6px;color:white;background:#042649}.badge-tag.staff{background:#35b6c0}.badge-hint{font-size:12px;color:var(--muted)}
+</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 4.3.35</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
+<div id="setup" class="setup hidden"><b>Einrichtung erforderlich:</b> Bitte in <code>config.js</code> SUPABASE_URL und SUPABASE_PUBLISHABLE_KEY eintragen.</div>
+<div class="authbar"><div><strong>WPS Event-Team</strong> <span id="userLabel" class="sync">nicht angemeldet</span> <span id="roleLabel" class="tag hidden"></span></div><div id="loginBox"><input id="loginEmail" type="email" placeholder="name@wps.de" autocomplete="username"><span class="password-wrap"><input id="loginPassword" type="password" placeholder="Passwort" autocomplete="current-password"><button type="button" id="passwordToggle" class="password-toggle" aria-label="Passwort anzeigen" title="Passwort anzeigen"><svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></span><button id="loginBtn">Anmelden</button></div><div id="logoutBox" class="hidden"><span id="syncState" class="sync">Synchronisiert</span> <button class="secondary hidden" id="usersBtn">Benutzerverwaltung</button> <button class="secondary" id="changePasswordBtn">Passwort ändern</button> <button class="secondary" id="logoutBtn">Abmelden</button></div></div>
+<div id="app" class="hidden">
+
+<div class="actions"><button id="toggleCheckin" type="button" class="secondary" aria-expanded="false" aria-controls="checkinPanel">✓ Check-in öffnen</button><button id="toggleBadges" type="button" class="secondary" aria-expanded="false" aria-controls="badgePanel">▤ Namensschilder drucken</button></div>
+<section id="checkinPanel" class="checkin-panel hidden" aria-label="Check-in"><div class="checkin-head"><div><h2 style="margin:0 0 5px">Check-in · Anwesenheit</h2><span class="invoice-hint">Alle angemeldeten WPS-Benutzer können die Anwesenheit erfassen.</span></div><button id="refreshCheckin" type="button" class="secondary">↻ Aktualisieren</button></div><div class="checkin-controls"><select id="checkinEvent" aria-label="Veranstaltung"><option value="conference">software@work · Konferenz · 06.11.</option><option value="dinner">software@work · Dinner · 05.11.</option><option value="workshop">roads@work · Workshop · 05.11.</option></select><input id="checkinSearch" type="search" placeholder="Name oder Firma suchen …" aria-label="Check-in durchsuchen"><select id="checkinFilter" aria-label="Anwesenheitsfilter"><option value="all">Alle</option><option value="open" selected>Noch nicht anwesend</option><option value="done">Anwesend</option></select></div><div class="checkin-metrics"><div class="card"><b id="checkinTotal">0</b><span>Angemeldet</span></div><div class="card"><b id="checkinDone">0</b><span>Anwesend</span></div><div class="card"><b id="checkinOpen">0</b><span>Noch offen</span></div></div><div id="checkinStatus" class="status" role="status"></div><div class="tablewrap checkin-table"><table><thead><tr><th>Name</th><th>Firma</th><th>Status</th><th>Aktion</th></tr></thead><tbody id="checkinBody"></tbody></table></div></section>
+
+<section id="badgePanel" class="badge-panel hidden" aria-label="Namensschilder drucken"><h2>Namensschilder · DURABLE 1453-02</h2><p class="badge-hint">Workshop: ROADS-Logo · Konferenz/Dinner: WPS-Logo · DIN A4 · 12 Schilder (2 × 6) · 75 × 40 mm · Seitenränder 30 mm, oben/unten 28,5 mm. Druck auf 100 %, ohne Kopf-/Fußzeilen.</p><div class="badge-controls"><select id="badgeEvent" aria-label="Veranstaltung für Namensschilder"><option value="conference">software@work · Konferenz</option><option value="workshop">roads@work · Workshop</option><option value="dinner">software@work · Dinner</option></select><input id="badgeSearch" type="search" placeholder="Name oder Firma suchen …"><select id="badgeRoleFilter" aria-label="Namensschild-Typ"><option value="all">Alle Rollen</option><option value="speaker">SPEAKER</option><option value="staff">STAFF</option><option value="guest">Gäste</option></select></div><div class="actions"><button id="badgeSelectAll" class="secondary" type="button">Alle dieser Veranstaltung auswählen</button><button id="badgeSelectVisible" class="secondary" type="button">Sichtbare auswählen</button><button id="badgeSelectNone" class="secondary" type="button">Auswahl aufheben</button></div><div class="badge-hint" id="badgeCount">0 ausgewählt</div><div id="badgeList" class="badge-list"></div><div class="badge-controls"><label class="badge-hint" for="badgeOffset">Bereits verbrauchte Felder auf dem ersten Bogen:</label><select id="badgeOffset" aria-label="Leere Felder am Anfang"></select><button id="badgePrint" type="button" class="secondary">Druckansicht öffnen</button><button id="badgePdf" type="button">PDF herunterladen</button></div><p class="badge-hint">PDF-Download funktioniert auf Windows und Mac. Für perforierte Bögen bitte im Acrobat-Druckdialog „Tatsächliche Größe“ / 100 % wählen, nicht „Anpassen“. Vor dem ersten Druck einen Test auf Normalpapier machen.</p></section>
+<div id="importControls" class="view-controls hidden"><button id="toggleImport" class="secondary" type="button" aria-expanded="true" aria-controls="importPanel">Importfunktionen ausblenden</button></div>
+<div id="importPanel"><div class="help"><b>OneDrive-Import (Admin):</b> Neue Anmeldungen aus dem synchronisierten OneDrive-Ordner einlesen und zentral speichern.</div><div class="actions"><button id="chooseOneDrive" type="button">OneDrive-Ordner auswählen</button><button id="readOneDrive" type="button" disabled>Neue Anmeldungen importieren</button><span id="oneDriveState" class="status">Noch kein Ordner ausgewählt.</span></div><div class="drop" id="drop"><strong>.eml-Dateien hier hineinziehen</strong><small>Mehrere Dateien gleichzeitig möglich · Veranstalter-Mail und Teilnehmerkopie werden automatisch zusammengeführt</small></div><input id="emlInput" type="file" accept=".eml,message/rfc822" multiple="">
+<div class="actions"><button class="secondary" id="backup">Backup sichern</button><button class="secondary" id="restoreBtn">Backup einlesen</button><input id="restoreInput" type="file" accept=".json"><button class="danger" id="clear">Alles löschen</button></div>
+</div>
+<div class="actions"><button id="exportXlsx" type="button">Excel exportieren (.xlsx)</button><button id="export" class="secondary hidden" type="button">CSV für Excel exportieren (Admin)</button></div>
+<div class="status" id="status">Daten werden nach Anmeldung geladen.</div>
+<div class="view-controls"><button id="toggleStats" class="secondary" type="button" aria-expanded="true" aria-controls="statsPanel mailPanel">Kennzahlen und E-Mail-Bereich ausblenden</button></div>
+<div id="statsPanel">
+<div class="stats-info" id="statsInfo">Kennzahlen beziehen sich auf die aktuell gefilterte Teilnehmerliste; Ausnahme: „Gutschriften prüfen (gesamt)“ zeigt alle offenen Fälle. Klick auf eine Zahl filtert die Liste.</div>
+<div class="stats-section"><h2>software@work · Konferenz</h2><div class="stats-grid">
+<div class="card metric" data-metric="conference:all" tabindex="0" role="button"><b id="cSaw">0</b><span>Konferenz gesamt</span></div>
+<div class="card metric" data-metric="conference:extern" tabindex="0" role="button"><b id="cSawExternal">0</b><span>Konferenz extern</span></div>
+<div class="card metric" data-metric="conference:intern" tabindex="0" role="button"><b id="cSawInternal">0</b><span>Konferenz WPS intern</span></div></div></div>
+<div class="stats-section"><h2>roads@work · Workshop</h2><div class="stats-grid">
+<div class="card metric" data-metric="workshop:all" tabindex="0" role="button"><b id="cRaw">0</b><span>Workshop gesamt</span></div>
+<div class="card metric" data-metric="workshop:extern" tabindex="0" role="button"><b id="cRawExternal">0</b><span>Workshop extern</span></div>
+<div class="card metric" data-metric="workshop:intern" tabindex="0" role="button"><b id="cRawInternal">0</b><span>Workshop WPS intern</span></div></div></div>
+<div class="stats-section"><h2>software@work · Dinner</h2><div class="stats-grid">
+<div class="card metric" data-metric="dinner:all" tabindex="0" role="button"><b id="cDinner">0</b><span>Dinner gesamt</span></div>
+<div class="card metric" data-metric="dinner:extern" tabindex="0" role="button"><b id="cDinnerExternal">0</b><span>Dinner extern</span></div>
+<div class="card metric" data-metric="dinner:intern" tabindex="0" role="button"><b id="cDinnerInternal">0</b><span>Dinner WPS intern</span></div></div></div>
+<div class="stats-section"><h2>Veranstaltungsorganisation</h2><div class="stats-grid" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div class="card metric" data-prep-metric="badge" tabindex="0" role="button" title="Offene Namensschilder anzeigen"><b id="badgeProgress">0 / 0</b><span>Namensschilder fertig · Klick zeigt offene</span></div><div class="card metric" data-prep-metric="place" tabindex="0" role="button" title="Offene Tischkarten anzeigen"><b id="placeProgress">0 / 0</b><span>Tischkarten fertig · Klick zeigt offene</span></div></div></div>
+<div class="stats-section"><h2>Weitere Kennzahlen</h2><div class="stats-grid stats-extra">
+<div class="card"><b id="cAll">0</b><span>Angemeldete Personen gesamt</span></div>
+<div class="card"><b id="cMeat">0</b><span>Dinner Fleisch</span></div>
+<div class="card"><b id="cFish">0</b><span>Dinner Fisch</span></div>
+<div class="card"><b id="cVeg">0</b><span>Dinner vegetarisch / vegan</span></div>
+<div class="card"><b id="cInvoiceOpen">0</b><span>Rechnungsprüfung offen</span></div>
+<div class="card"><b id="cInvoices">0</b><span>Rechnungen vorgesehen / versendet</span></div>
+<div class="card"><b id="cInvoiceSum">0,00 €</b><span>Rechnungssumme (inkl. offener Gutschriftfälle)</span></div><div class="card metric credit-review-card" data-metric="credit:review" tabindex="0" role="button"><b id="cCreditReview">0</b><span>⚠ Gutschriften prüfen (gesamt)</span></div></div></div>
+<div id="cancelledStats" class="stats-info hidden"></div>
+</div><!-- /statsPanel -->
+<section id="mailPanel" class="mail-panel hidden"><h2>Persönliche Event-Informationen · nur Administratoren</h2><p>Vorlagen bearbeiten und zentral speichern. Der Versand erfolgt manuell in Outlook; danach separat als versendet markieren.</p><div class="actions"><button type="button" id="editMailConference" class="secondary">Vorlage Konferenz bearbeiten</button><button type="button" id="editMailDinner" class="secondary">Vorlage Dinner &amp; Konferenz bearbeiten</button><span id="mailSummary" class="status">Mailstatus wird geladen …</span></div></section>
+<div class="actions"><button id="addParticipant" type="button" class="secondary hidden">+ Teilnehmer hinzufügen</button></div>
+<div class="filters"><input id="search" type="search" placeholder="Name, Firma, E-Mail …"><select id="statusFilter"><option value="Angemeldet">Status: angemeldet</option><option value="">Status: alle</option><option value="Abgesagt">Status: abgesagt</option></select><select id="workshopFilter"><option value="">Workshop: alle</option><option>Ja</option><option>Nein</option></select><select id="confFilter"><option value="">Konferenz: alle</option><option>Ja</option><option>Nein</option></select><select id="salutationFilter" aria-label="Anrede"><option value="">Anrede: alle</option><option value="Herr">Anrede: Herr</option><option value="Frau">Anrede: Frau</option><option value="missing">Anrede: fehlt</option></select><select id="speakerFilter" aria-label="Vortragende"><option value="">Vortragende: alle</option><option value="Ja">Vortragende: Ja</option><option value="Nein">Vortragende: Nein</option></select><select id="dinnerFilter"><option value="">Dinner: alle</option><option>Ja</option><option>Nein</option></select><select id="allergyFilter" aria-label="Allergien"><option value="">Allergien: alle</option><option value="yes">Allergien: vorhanden</option><option value="no">Allergien: keine eingetragen</option></select><select id="internalFilter"><option value="">Intern/extern: alle</option><option value="Ja">WPS intern</option><option value="Nein">extern</option></select><select id="registrationFilter" aria-label="Anmeldung über"><option value="">Anmeldung über: alle</option><option value="Newsletter">Anmeldung über: Newsletter</option><option value="Webseite">Anmeldung über: Webseite</option><option value="Manuell">Anmeldung über: Manuell</option></select><select id="creditFilter" aria-label="Gutschriften"><option value="">Gutschriften: alle</option><option value="review">Gutschrift prüfen</option><option value="done">Gutschrift erstellt</option></select><select id="invoiceStatusFilter" aria-label="Rechnungsstatus"><option value="">Rechnungsstatus: alle</option><option value="Offen">Rechnungsstatus: Offen</option><option value="Rechnung vorgesehen">Rechnungsstatus: Rechnung vorgesehen</option><option value="Rechnung versendet">Rechnungsstatus: Rechnung versendet</option><option value="Rechnung bezahlt">Rechnungsstatus: Rechnung bezahlt</option><option value="Gutschrift erstellt">Rechnungsstatus: Gutschrift erstellt</option><option value="Keine Rechnung">Rechnungsstatus: Keine Rechnung</option></select><select id="badgeFilter" aria-label="Namensschilder"><option value="">Namensschilder: alle</option><option value="open">Namensschilder: offen</option><option value="done">Namensschilder: fertig</option></select><select id="placeFilter" aria-label="Tischkarten"><option value="">Tischkarten: alle</option><option value="open">Tischkarten: offen</option><option value="done">Tischkarten: fertig</option></select><select id="mailFilter" class="hidden" aria-label="Infomail-Status"><option value="">Infomail: alle</option><option value="open">Infomail: offen</option><option value="sent">Infomail: versendet</option></select><select id="invoiceFilter" aria-label="Rechnungsbetrag"><option value="">Rechnungsbetrag: alle</option><option value="mit">Rechnungsbetrag: mit Betrag</option><option value="ohne">Rechnungsbetrag: ohne Betrag</option></select></div>
+<div class="column-toolbar"><button id="toggleColumns" class="secondary" type="button" aria-expanded="false" aria-controls="columnPicker">Spalten auswählen ▾</button><span id="columnSummary" class="column-summary"></span><div id="columnPicker" class="column-picker hidden"><div class="column-picker-heading"><strong>Sichtbare Spalten</strong><button id="closeColumns" class="column-close" type="button" aria-label="Spaltenauswahl schließen" title="Schließen">×</button><button id="showAllColumns" class="secondary" type="button">Alle anzeigen</button></div><div id="columnOptions" class="column-options"></div></div></div>
+<div class="tablewrap"><table id="participantTable"><thead><tr><th>Nr.</th><th>Bearbeiten</th><th>Status</th><th class="sortable" data-sort="date" tabindex="0" role="button" aria-label="Anmeldedatum sortieren" aria-sort="none">Anmeldung <span class="sort-arrow">↕</span></th><th>Rechnungsstatus</th><th>Rechnungsbetrag</th><th>Gutschrift</th><th class="mail-column">Infomail</th><th>Namensschild</th><th>Tischkarte</th><th>Anrede</th><th>Titel</th><th>Vorname</th><th class="sortable" data-sort="last" tabindex="0" role="button" aria-label="Nachname sortieren" aria-sort="none">Nachname <span class="sort-arrow">↕</span></th><th class="sortable" data-sort="company" tabindex="0" role="button" aria-label="Firma sortieren" aria-sort="none">Firma <span class="sort-arrow">↕</span></th><th>E-Mail</th><th>Telefon</th><th>r@w Workshop</th><th>s@w Konferenz</th><th>Dinner</th><th>Vortrag</th><th>Allergie</th><th>Essen</th><th>WPS intern</th><th>Anmeldung über</th><th>Straße</th><th>Nr.</th><th>PLZ</th><th>Ort</th><th>Anmerkungen</th><th>Quelle</th></tr></thead><tbody id="tbody"></tbody></table></div>
+<div class="help"><b>Speicherung:</b> Alle Teilnehmer werden zentral in Supabase gespeichert. Änderungen stehen damit allen angemeldeten Teammitgliedern zur Verfügung. „Backup sichern“ erzeugt weiterhin eine lokale JSON-Sicherungsdatei.</div>
+<div id="mailModal" class="modalback hidden"><div class="modal mail-compose" style="width:min(820px,96vw)"><h2 id="mailModalTitle">Event-Mail</h2><p id="mailModalHint" class="invoice-hint"></p><div id="mailTemplateEditor" class="hidden"><label for="mailSubject">Betreff</label><input id="mailSubject" maxlength="250"><label for="mailBody">Text (ohne Anrede und Outlook-Signatur)</label><textarea id="mailBody"></textarea><p>Die persönliche Anrede wird automatisch vorangestellt. Die Outlook-Signatur folgt beim Öffnen des Entwurfs.</p></div><div id="mailPreview" class="hidden"><label>Empfänger</label><input id="mailTo" readonly><label>Betreff</label><input id="mailPreviewSubject" readonly><label>Nachricht</label><pre id="mailPreviewBody"></pre><p>Das Öffnen in Outlook ist noch keine Versandbestätigung.</p></div><div class="modalactions"><button type="button" class="secondary" id="mailClose">Schließen</button><button type="button" id="mailSaveTemplate" class="hidden">Vorlage speichern</button><button type="button" id="mailOpenOutlook" class="hidden">In Outlook öffnen</button><button type="button" id="mailMarkSent" class="secondary hidden">Als versendet markieren</button><button type="button" id="mailUndoSent" class="danger hidden">Versandstatus zurücksetzen</button></div></div></div>
+<div id="usersModal" class="modalback hidden"><div class="modal" style="width:min(760px,96vw)"><h2>Benutzerverwaltung</h2><p class="invoice-hint">Rollenänderungen gelten nach dem nächsten Laden bzw. Anmelden. Das eigene Administratorkonto kann nicht herabgestuft werden.</p><div id="usersList">Benutzer werden geladen …</div><div class="modalactions"><button class="secondary" id="usersClose">Schließen</button></div></div></div>
+<div id="passwordModal" class="modalback hidden"><div class="modal" style="width:min(520px,96vw)"><h2>Passwort ändern</h2><div class="formgrid" style="grid-template-columns:1fr"><div class="field"><label>Aktuelles Passwort</label><input id="pwCurrent" type="password" autocomplete="current-password"></div><div class="field"><label>Neues Passwort</label><input id="pwNew" type="password" autocomplete="new-password"></div><div class="field"><label>Neues Passwort wiederholen</label><input id="pwRepeat" type="password" autocomplete="new-password"></div></div><div class="modalactions"><button class="secondary" id="pwCancel">Abbrechen</button><button id="pwSave">Passwort ändern</button></div></div></div>
+<div id="importReviewModal" class="modalback hidden"><div class="modal" style="width:min(850px,96vw)"><h2>Änderungen aus Anmeldungen prüfen</h2><p class="invoice-hint">Bereits angemeldete Personen: Bitte die gewünschten Änderungen auswählen. Ohne Bestätigung bleiben vorhandene Buchungen und Essenswünsche unverändert. Manuelle Rechnungsentscheidungen bleiben geschützt.</p><div id="importReviewList"></div><div class="modalactions"><button id="importReviewCancel" class="secondary" type="button">Import abbrechen</button><button id="importReviewSkip" class="secondary" type="button">Ohne Änderungen fortfahren</button><button id="importReviewApply" type="button">Ausgewählte Änderungen übernehmen</button></div></div></div>
+<div id="editModal" class="modalback hidden"><div class="modal editor-modal"><h2 id="editorTitle">Teilnehmer bearbeiten</h2><div class="formgrid">
+<div class="field"><label>Status</label><select id="e_status"><option>Angemeldet</option><option>Abgesagt</option></select></div><div class="field"><label>Anmeldung</label><input id="e_date"></div><div class="field"><label>Titel</label><input id="e_title"></div>
+<div class="field"><label>Anrede</label><select id="e_salutation"><option value="">Keine Angabe</option><option value="Herr">Herr</option><option value="Frau">Frau</option></select></div><div class="field"><label>Vorname</label><input id="e_first"></div><div class="field"><label>Nachname</label><input id="e_last"></div><div class="field"><label>Firma</label><input id="e_company"></div>
+<div class="field"><label>E-Mail</label><input id="e_email" type="email"></div><div class="field"><label>Telefon</label><input id="e_phone"></div><div class="field"><label>r@w Workshop</label><select id="e_workshop"><option>Ja</option><option>Nein</option></select></div>
+<div class="field"><label>s@w Konferenz</label><select id="e_conference"><option>Ja</option><option>Nein</option></select></div><div class="field"><label>Dinner</label><select id="e_dinner"><option>Ja</option><option>Nein</option></select></div><div class="field"><label>Vortrag auf der Konferenz</label><select id="e_speaker"><option>Nein</option><option>Ja</option></select></div><div class="field wide"><label for="e_allergy">Allergien / Unverträglichkeiten (nur falls für die Verpflegung relevant)</label><textarea id="e_allergy" maxlength="500" placeholder="z. B. Erdnüsse, Sellerie, Laktose"></textarea></div>
+<div class="field"><label>Essenswunsch</label><select id="e_meal"><option value=""></option><option>Fleisch</option><option>Fisch</option><option>Vegetarisch</option><option>Vegan</option></select></div><div class="field"><label>Anmeldung über</label><input id="e_registration"></div><div class="field"><label>Straße</label><input id="e_street"></div>
+<div class="field"><label>Hausnummer</label><input id="e_no"></div><div class="field"><label>PLZ</label><input id="e_zip"></div><div class="field"><label>Ort</label><input id="e_city"></div>
+<div id="invoiceEditFields" class="field wide"><label for="e_invoiceStatus">Rechnungsstatus</label><select id="e_invoiceStatus"><option value="Offen">Offen</option><option value="Rechnung vorgesehen">Rechnung vorgesehen</option><option value="Rechnung versendet">Rechnung versendet</option><option value="Rechnung bezahlt">Rechnung bezahlt</option><option value="Gutschrift erstellt">Gutschrift erstellt</option><option value="Keine Rechnung">Keine Rechnung</option></select><label for="e_invoiceAmount">Rechnungsbetrag (€)</label><input id="e_invoiceAmount" type="number" min="0" step="0.01" inputmode="decimal"><span class="invoice-hint" id="invoiceHint"></span><div id="invoiceHistory"></div></div><div class="field wide"><label>Anmerkungen</label><textarea id="e_note"></textarea></div></div><div class="modalactions"><button class="danger" id="editDelete" style="margin-right:auto">Teilnehmer löschen</button><button class="secondary" id="editCancel">Abbrechen</button><button id="editSave">Änderungen speichern</button></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script>
+const SEED=[]; let rows=[]; const $=id=>document.getElementById(id); const clean=s=>(s||'').replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim();
+function decodeQP(s){return s.replace(/=\r?\n/g,'').replace(/=([A-Fa-f0-9]{2})/g,(_,h)=>String.fromCharCode(parseInt(h,16)))}function utf8(s){try{return decodeURIComponent(escape(s))}catch(e){return s}}
+function header(text,name){let m=text.match(new RegExp('^'+name+':\\s*(.*(?:\\r?\\n[ \\t].*)*)','mi'));return m?clean(m[1].replace(/\r?\n[ \t]+/g,' ')):''}
+function parseBody(eml){let body=eml.split(/\r?\n\r?\n/).slice(1).join('\n\n');body=utf8(decodeQP(body));let doc=new DOMParser().parseFromString(body,'text/html');return {doc,text:clean(doc.body?doc.body.innerText:body)}}
+function pairs(doc){let p={};[...doc.querySelectorAll('tr')].forEach(tr=>{let c=[...tr.querySelectorAll(':scope > td')].map(x=>clean(x.innerText));if(c.length>=2&&c[0])p[c[0].replace(/\s*[:：]\s*$/,'')]=c[1]});return p}
+function get(p,...ks){for(let k of ks){let x=Object.keys(p).find(a=>a.toLowerCase()===k.toLowerCase());if(x)return p[x]}for(let k of ks){let x=Object.keys(p).find(a=>a.toLowerCase().includes(k.toLowerCase()));if(x)return p[x]}return ''}
+function yn(v){let x=(v||'').toLowerCase();if(!x)return 'Nein';if(/nicht|keine teilnahme|nehme nicht/.test(x))return 'Nein';return /ja|nehme teil|vor ort|online|fisch|fleisch|veget|vegan/.test(x)?'Ja':'Nein'}function meal(v){let x=(v||'').toLowerCase();for(let k of ['vegetarisch','vegan','fisch','fleisch'])if(x.includes(k))return k[0].toUpperCase()+k.slice(1);return ''}
+function dateFrom(t){let m=t.match(/Datum und Uhrzeit:\s*(\d{2}\.\d{2}\.\d{4}\s+\d{2}:\d{2}(?::\d{2})?)/i);return m?m[1]:''}
+function registrationFromSubject(subject){
+ const s=String(subject||'').toLocaleLowerCase('de').replace(/^\s*(?:\[ext\]\s*)+/i,'').trim();
+ if(s.includes('anmeldung zur software@work konferenz'))return 'Webseite';
+ if(s.includes('anmeldung zur software@work 2026')||s.includes('anmeldung zum roads@work anwender-workshop'))return 'Newsletter';
+ return '';
+}
+function parseEML(text,filename){let {doc,text:plain}=parseBody(text),p=pairs(doc),sub=utf8(decodeQP(header(text,'Subject'))),all=(sub+' '+plain).toLowerCase();let raw=all.includes('roads@work');let conferenceOnly=sub.toLowerCase().includes('anmeldung zur software@work konferenz');let d=get(p,'Teilnahme am Dinner am 05. November 2026','Teilnahme am Dinner am 5. November 2026','Teilnahme am Dinner');let c=get(p,'Teilnahme an der Konferenz am 06. November 2026','Teilnahme an der Konferenz am 6. November 2026','Teilnahme an der Konferenz');let w='Nein';for(let k of Object.keys(p))if(k.toLowerCase().includes('ich nehme am roads@work community workshop'))w=yn(p[k]);let conference=conferenceOnly?'Ja':yn(c);let submitted={workshop:Object.keys(p).some(k=>k.toLowerCase().includes('ich nehme am roads@work community workshop')),conference:conferenceOnly||!!c,dinner:!conferenceOnly&&!!d,meal:!conferenceOnly&&!!d&&yn(d)==='Ja'&&!!meal(d)};let confType=conferenceOnly?'vor Ort im Hotel Hafen Hamburg':(conference==='Ja'?clean(c):'');let company=get(p,'Firma / Institution','Firma');return {date:dateFrom(plain)||header(text,'Date'),source:'E-Mail',salutation:['Herr','Frau'].includes(get(p,'Anrede'))?get(p,'Anrede'):'',title:get(p,'Titel'),first:get(p,'Vorname'),last:get(p,'Nachname'),company,email:get(p,'E-Mail','Email'),phone:get(p,'Telefon'),workshop:w,dinner:conferenceOnly?'Nein':yn(d),meal:conferenceOnly?'':meal(d),conference,confType,street:get(p,'Strasse','Straße'),no:get(p,'Hausnummer'),zip:get(p,'Plz','PLZ'),city:get(p,'Ort'),note:get(p,'Ihre Nachricht','Nachricht'),registration:registrationFromSubject(sub),filename,_submitted:submitted,internal:(company.trim().toLowerCase()==='wps'||get(p,'E-Mail','Email').trim().toLowerCase().endsWith('@wps.de'))?'Ja':'Nein',_new:true}}
+function key(r){let e=(r.email||'').trim().toLowerCase(),f=(r.first||'').trim().toLowerCase(),l=(r.last||'').trim().toLowerCase();return e+'|'+f+'|'+l}
+function merge(a,b){for(let k of Object.keys(b)){if(k==='_new')continue;if((!a[k]||a[k]==='Nein')&&b[k]&&b[k]!=='Nein')a[k]=b[k]}a._new=true;return a}
+function addRow(r){let k=key(r),i=rows.findIndex(x=>key(x)===k&&k!=='||');if(i>=0){rows[i]=merge(rows[i],r);return false}rows.push(r);return true}
+let db=null,currentUser=null,currentRole=null;let checkins=new Map();let checkinBusy=false;let rowVersions=new Map();let participantIds=new Map(),mailDelivery=new Map(),mailTemplates=new Map();
+const canInvoice=()=>currentRole==='admin'||currentRole==='accounting';
+const canChooseInvoiceStatus=r=>r.internal!=='Ja'&&(canInvoice()||(currentRole==='event_team'&&!['Rechnung versendet','Rechnung bezahlt','Gutschrift erstellt'].includes(invoiceStatus(r))&&!r.invoiceProcessLocked));
+const invoiceChoices=r=>canInvoice()?['Offen','Rechnung vorgesehen','Rechnung versendet','Rechnung bezahlt','Gutschrift erstellt','Keine Rechnung']:['Offen','Rechnung vorgesehen','Keine Rechnung'];
+let invoiceHistoryByKey=new Map();
+const isAdmin=()=>currentRole==='admin';
+const canEditParticipant=()=>currentRole==='admin'||currentRole==='event_team';
+const canManagePrep=()=>currentRole==='admin'||currentRole==='event_team';
+const needsBadge=r=>participantStatus(r)==='Angemeldet'&&r.conference==='Ja';
+const needsPlace=r=>participantStatus(r)==='Angemeldet'&&r.dinner==='Ja';
+function dbRow(r){let x={...r};delete x._new;delete x._submitted;delete x.invoiceProcessLocked;return {identity_key:key(r),data:x,updated_at:new Date().toISOString()}}
+async function load(){if(!db||!currentUser)return;let {data,error}=await db.from('event_registrations').select('identity_key,data,updated_at,invoice_audit_id').order('updated_at',{ascending:true});if(error){$('status').textContent='Fehler beim Laden: '+error.message;return}rowVersions=new Map((data||[]).map(x=>[x.identity_key,x.updated_at]));participantIds=new Map((data||[]).map(x=>[x.identity_key,x.invoice_audit_id]));rows=(data||[]).map(x=>x.data);await loadInvoiceHistory();await loadMailData();await loadCheckins();render()}
+async function loadInvoiceHistory(){
+ invoiceHistoryByKey=new Map();
+ const {data,error}=await db.from('event_invoice_status_history').select('identity_key,old_status,new_status,changed_at,changed_by_email').order('changed_at',{ascending:false}).limit(10000);
+ if(error){console.warn('Rechnungshistorie nicht verfügbar:',error.message);return}
+ for(const entry of data||[]){if(!invoiceHistoryByKey.has(entry.identity_key))invoiceHistoryByKey.set(entry.identity_key,[]);invoiceHistoryByKey.get(entry.identity_key).push(entry)}
+ for(const r of rows){const h=invoiceHistoryByKey.get(key(r))||[];r.invoiceProcessLocked=h.some(x=>['Rechnung versendet','Rechnung bezahlt','Gutschrift erstellt'].includes(x.new_status))}
+}
+function historyMarkup(k){const h=invoiceHistoryByKey.get(k)||[];if(!h.length)return '<div class="invoice-hint">Noch keine protokollierte Statusänderung.</div>';
+ const when=t=>new Date(t).toLocaleString('de-DE');return `<div class="invoice-hint">Letzte Änderung: ${esc(h[0].changed_by_email||'Unbekannt')} · ${esc(when(h[0].changed_at))}</div><details><summary>Vollständige Statushistorie (${h.length})</summary><ol>${h.map(x=>`<li>${esc(when(x.changed_at))} · ${esc(x.changed_by_email||'Unbekannt')}: ${esc(x.old_status||'Offen')} → ${esc(x.new_status)}</li>`).join('')}</ol></details>`;
+}
+async function saveExisting(oldKey,updated,expectedVersion){
+ const expected=expectedVersion===undefined?rowVersions.get(oldKey):expectedVersion;
+ if(!expected)throw new Error('Datensatzversion fehlt. Bitte neu laden.');
+ if(!['admin','event_team','accounting'].includes(currentRole))throw new Error('Keine Berechtigung zum Speichern.');
+ if(currentRole==='accounting'&&key(updated)!==oldKey)throw new Error('Buchhaltung darf Name und E-Mail nicht ändern.');
+ const {error}=await db.rpc('event_save_registration',{
+   p_old_key:oldKey,
+   p_data:((r)=>{delete r.invoiceProcessLocked;return r})({...updated}),
+   p_expected_at:expected
+ });
+ if(error)throw error;
+}
+async function upsertRows(list){if(!list.length)return;let unique=new Map();for(let r of list){let k=key(r);if(!k||k==='||')continue;if(unique.has(k))unique.set(k,merge(unique.get(k),r));else unique.set(k,{...r})}let payload=[...unique.values()].map(dbRow);if(!payload.length)return;let {error}=await db.from('event_registrations').upsert(payload,{onConflict:'identity_key'});if(error)throw error}
+async function insertNewRow(r){
+ const payload=dbRow(r);
+ delete payload.updated_at;
+ const {error}=await db.from('event_registrations').insert(payload);
+ if(error)throw error;
+}
+function normMatch(v){return String(v||'').normalize('NFKC').trim().toLocaleLowerCase('de').replace(/\s+/g,' ')}
+function findImportMatch(r){
+  // Nur eine eindeutige Personenidentitaet gilt als Dublette.
+  // Eine gemeinsam verwendete E-Mail-Adresse allein ist KEIN Dublettenkriterium.
+  const email=normMatch(r.email),first=normMatch(r.first),last=normMatch(r.last);
+  if(!email||!first||!last)return -1;
+  return rows.findIndex(x=>normMatch(x.email)===email&&normMatch(x.first)===first&&normMatch(x.last)===last);
+}
+function enrichFromMail(existing,incoming){
+ const result={...existing};
+ // Nur leere Kontaktfelder ergänzen. Buchungen ausschließlich nach bestätigter Änderungsprüfung.
+ for(const field of ['street','no','zip','city','phone','title','salutation']){
+  if(!String(result[field]||'').trim()&&String(incoming[field]||'').trim())result[field]=incoming[field];
+ }
+ return result;
+}
+const importFieldLabels={workshop:'Workshop',conference:'Konferenz',dinner:'Dinner',meal:'Essenswunsch'};
+function importProposals(existing,incoming){
+ // Nur Felder aus dem tatsächlich eingereichten Formular prüfen; keine impliziten "Nein"-Werte übernehmen.
+ const submitted=incoming._submitted||{};
+ const fields=['workshop','conference','dinner','meal'];
+ return fields.filter(field=>submitted[field]&&String(existing[field]||'')!==String(incoming[field]||'')&&
+  (field!=='meal'||incoming.dinner==='Ja'))
+  .map(field=>({field,from:String(existing[field]||'—'),to:String(incoming[field]||'—')}));
+}
+function reviewImportChanges(candidates){
+ return new Promise(resolve=>{
+  const modal=$('importReviewModal'),list=$('importReviewList');
+  list.replaceChildren();
+  candidates.forEach((candidate,i)=>{
+   const box=document.createElement('div');box.className='import-review-item';
+   const h=document.createElement('h3');h.textContent=[candidate.before.first,candidate.before.last].join(' ')+' · '+candidate.before.email;box.appendChild(h);
+   const time=document.createElement('small');time.textContent='Vorhandene Anmeldung: '+(candidate.before.date||'ohne Datum')+' · Neue E-Mail: '+(candidate.incoming.date||'ohne Datum');box.appendChild(time);
+   for(const proposal of candidate.proposals){
+    const label=document.createElement('label'),check=document.createElement('input');check.type='checkbox';check.checked=true;check.dataset.candidate=String(i);check.dataset.field=proposal.field;
+    const text=document.createElement('span');text.textContent=importFieldLabels[proposal.field]+': '+proposal.from+' → '+proposal.to;
+    label.append(check,text);box.appendChild(label);
+   }
+   if(candidate.older){const warning=document.createElement('div');warning.className='import-review-warning';warning.textContent='Achtung: Diese E-Mail ist älter als die gespeicherte Anmeldung. Änderungen sind deshalb zunächst abgewählt.';box.appendChild(warning);box.querySelectorAll('input').forEach(x=>x.checked=false)}
+   if(candidate.unknownDate){const warning=document.createElement('div');warning.className='import-review-warning';warning.textContent='Das Datum konnte nicht eindeutig verglichen werden. Bitte Angaben besonders sorgfältig prüfen.';box.appendChild(warning);box.querySelectorAll('input').forEach(x=>x.checked=false)}
+   list.appendChild(box);
+  });
+  const done=choice=>{modal.classList.add('hidden');$('importReviewApply').onclick=null;$('importReviewSkip').onclick=null;$('importReviewCancel').onclick=null;resolve(choice)};
+  $('importReviewCancel').onclick=()=>done(null);
+  $('importReviewSkip').onclick=()=>done([]);
+  $('importReviewApply').onclick=()=>done([...list.querySelectorAll('input:checked')].map(el=>({index:Number(el.dataset.candidate),field:el.dataset.field})));
+  modal.classList.remove('hidden');
+ });
+}
+async function addFiles(fs){
+ if(!isAdmin())return false;
+ let added=0,merged=0,fail=0,unchanged=0,updated=0;
+ const planned=new Map(),candidates=[];
+ // Während der Prüfung nichts in rows oder Supabase verändern.
+ for(const f of fs){if(!f.name.toLowerCase().endsWith('.eml'))continue;
+  try{
+   const incoming=parseEML(await f.text(),f.name);
+   if(!normMatch(incoming.email)||!normMatch(incoming.first)||!normMatch(incoming.last)){fail++;continue}
+   const k=key(incoming),i=findImportMatch(incoming);
+   if(i<0){
+    if(planned.has(k)){unchanged++;continue}
+    planned.set(k,{type:'new',row:incoming});added++;continue;
+   }
+   const before=planned.get(k)?.row||rows[i],after=enrichFromMail(before,incoming);
+   const proposals=importProposals(before,incoming);
+   if(JSON.stringify(after)!==JSON.stringify(before)){planned.set(k,{type:'existing',row:after});merged++}
+   else unchanged++;
+   if(proposals.length){
+    const previous=registrationTime(before.date),newer=registrationTime(incoming.date);
+    candidates.push({key:k,before,incoming,proposals,older:Number.isFinite(previous)&&Number.isFinite(newer)&&newer<previous,unknownDate:!Number.isFinite(previous)||!Number.isFinite(newer)});
+   }
+  }catch(e){console.error('Import:',e);fail++}
+ }
+ if(candidates.length){
+  const choice=await reviewImportChanges(candidates);
+  if(choice===null){$('status').textContent='Import abgebrochen. Es wurden keine Änderungen gespeichert.';return false}
+  for(const {index,field} of choice){
+   const c=candidates[index];if(!c)continue;
+   const entry=planned.get(c.key)||{type:'existing',row:{...c.before}};
+   entry.row[field]=c.incoming[field];planned.set(c.key,entry);updated++;
+  }
+ }
+ try{
+  for(const [k,entry] of planned){
+   const row={...entry.row};delete row._submitted;
+   if(entry.type==='existing')await saveExisting(k,row);
+   else await insertNewRow(row);
+  }
+  await load();
+  $('status').textContent=`${added} neue Anmeldung(en), ${merged} mit ergänzten Kontaktdaten, ${updated} bestätigte Feldänderung(en), ${unchanged} unverändert/unklar${fail?', '+fail+' Fehler':''}. Zentral synchronisiert.`;
+  return fail===0;
+ }catch(e){await load();$('status').textContent='Synchronisierung fehlgeschlagen (bitte neu laden und erneut importieren): '+e.message;return false}
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function invoiceBase(r){return (r.workshop==='Ja'?75:0)+(r.conference==='Ja'?110:0)+(r.dinner==='Ja'?110:0)}
+function invoiceAmount(r){let n=Number(r.invoiceAmount);return r.invoiceAmount===undefined||r.invoiceAmount===null||r.invoiceAmount===''||!Number.isFinite(n)?invoiceBase(r):n}
+function isInvoiceEligible(r){return r.internal!=='Ja'&&participantStatus(r)==='Angemeldet'}
+function eur(n){return Number(n).toLocaleString('de-DE',{style:'currency',currency:'EUR'})}
+function participantStatus(r){return r.status==='Abgesagt'?'Abgesagt':'Angemeldet'}
+function registrationTime(value){
+  let s=String(value||'').trim();if(!s)return Number.POSITIVE_INFINITY;
+  let m=s.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})(?:[,\s]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+  if(m){let d=new Date(+m[3],+m[2]-1,+m[1],+(m[4]||0),+(m[5]||0),+(m[6]||0));return d.getFullYear()===+m[3]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[1]?d.getTime():Number.POSITIVE_INFINITY;}
+  m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[T\s]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);
+  if(m){let d=new Date(+m[1],+m[2]-1,+m[3],+(m[4]||0),+(m[5]||0),+(m[6]||0));return d.getFullYear()===+m[1]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[3]?d.getTime():Number.POSITIVE_INFINITY;}
+  return Number.POSITIVE_INFINITY;
+}
+let sortField='date',sortDirection='asc';
+const germanSorter=new Intl.Collator('de-DE',{sensitivity:'base',numeric:true,ignorePunctuation:true});
+function compareNames(a,b){return germanSorter.compare(String(a||'').trim(),String(b||'').trim())}
+function invoiceStatus(r){const known=['Offen','Rechnung vorgesehen','Rechnung versendet','Rechnung bezahlt','Gutschrift erstellt','Keine Rechnung'];return known.includes(r.invoiceStatus)?r.invoiceStatus:(r.invoicePlanned===true?'Rechnung vorgesehen':'Offen')}
+function invoiceStatusForDisplay(r){return r.internal==='Ja'?'Keine Rechnung':invoiceStatus(r)}
+function creditReview(r){return r.internal!=='Ja'&&participantStatus(r)==='Abgesagt'&&['Rechnung versendet','Rechnung bezahlt'].includes(invoiceStatus(r))}
+function creditDone(r){return r.internal!=='Ja'&&participantStatus(r)==='Abgesagt'&&invoiceStatus(r)==='Gutschrift erstellt'}
+function creditHint(r){if(creditReview(r))return 'Gutschrift prüfen';if(creditDone(r))return 'Erledigt';if(r.internal!=='Ja'&&participantStatus(r)==='Abgesagt'&&invoiceStatus(r)==='Rechnung vorgesehen')return 'Rechnung prüfen';return ''}
+function hasDisplayedInvoice(r){return r.internal!=='Ja'&&['Rechnung vorgesehen','Rechnung versendet','Rechnung bezahlt'].includes(invoiceStatus(r))}
+
+function hasAllergy(r){return String(r.allergy??'').trim().length>0}
+function filtered(){
+ let q=$('search').value.toLowerCase(),sf=$('statusFilter').value;
+ let result=rows.filter(r=>(!q||Object.values(r).join(' ').toLowerCase().includes(q))&&(!sf||participantStatus(r)===sf)&&(!$('workshopFilter').value||r.workshop===$('workshopFilter').value)&&(!$('confFilter').value||r.conference===$('confFilter').value)&&(!$('salutationFilter').value||($('salutationFilter').value==='missing'?!r.salutation:r.salutation===$('salutationFilter').value))&&(!$('speakerFilter').value||(r.speaker==='Ja'?'Ja':'Nein')===$('speakerFilter').value)&&(!$('dinnerFilter').value||r.dinner===$('dinnerFilter').value)&&(!$('allergyFilter').value||($('allergyFilter').value==='yes'?hasAllergy(r):!hasAllergy(r)))&&(!$('internalFilter').value||r.internal===$('internalFilter').value)&&(!$('registrationFilter').value||r.registration===$('registrationFilter').value)&&(!$('creditFilter').value||($('creditFilter').value==='review'?creditReview(r):creditDone(r)))&&(!$('invoiceStatusFilter').value||invoiceStatusForDisplay(r)===$('invoiceStatusFilter').value)&&(!$('badgeFilter').value||(needsBadge(r)&&($('badgeFilter').value==='done'?r.badgeReady===true:r.badgeReady!==true)))&&(!$('placeFilter').value||(needsPlace(r)&&($('placeFilter').value==='done'?r.placeReady===true:r.placeReady!==true)))&&(!isAdmin()||!$('mailFilter').value||(mailEligible(r)&&($('mailFilter').value==='sent'?mailDelivery.has(participantIds.get(key(r))):!mailDelivery.has(participantIds.get(key(r))))))&&(!$('invoiceFilter').value||($('invoiceFilter').value==='mit'?hasDisplayedInvoice(r):!hasDisplayedInvoice(r))));
+ return result.sort((a,b)=>{
+  if(sortField==='last'||sortField==='company'){
+   const av=String(a[sortField]||'').trim(),bv=String(b[sortField]||'').trim();
+   // Fehlende Namen/Firmen stehen unabhängig von der Richtung am Ende.
+   if(!av&&bv)return 1;
+   if(av&&!bv)return -1;
+   let primary=compareNames(av,bv)* (sortDirection==='asc'?1:-1);
+   if(primary)return primary;
+   return compareNames(a.last,b.last)||compareNames(a.first,b.first)||compareNames(a.company,b.company)||compareNames(a.email,b.email);
+  }
+  const at=registrationTime(a.date),bt=registrationTime(b.date);
+  // Fehlende/ungültige Datumswerte immer am Ende, unabhängig von der Richtung.
+  if(!Number.isFinite(at)&&Number.isFinite(bt))return 1;
+  if(Number.isFinite(at)&&!Number.isFinite(bt))return -1;
+  const primary=(at-bt)*(sortDirection==='desc'?-1:1);
+  return primary||compareNames(a.last,b.last)||compareNames(a.first,b.first);
+ });
+}
+function updateSortHeaders(){
+ document.querySelectorAll('th[data-sort]').forEach(th=>{
+  const active=th.dataset.sort===sortField;
+  th.setAttribute('aria-sort',active?(sortDirection==='asc'?'ascending':'descending'):'none');
+  th.querySelector('.sort-arrow').textContent=active?(sortDirection==='asc'?'▲':'▼'):'↕';
+  const date=th.dataset.sort==='date';
+  th.title=date?(active?(sortDirection==='desc'?'Klicken: älteste zuerst':'Klicken: neueste zuerst'):'Klicken: neueste zuerst'):(active?(sortDirection==='asc'?'Klicken: Z–A sortieren':'Klicken: A–Z sortieren'):'Klicken: A–Z sortieren');
+ });
+}
+function toggleSort(field){
+ if(sortField===field)sortDirection=sortDirection==='asc'?'desc':'asc';
+ else{sortField=field;sortDirection=field==='date'?'desc':'asc'}
+ render();
+}
+document.querySelectorAll('th[data-sort]').forEach(th=>{
+ th.addEventListener('click',()=>toggleSort(th.dataset.sort));
+ th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleSort(th.dataset.sort)}});
+});
+// Persönliche Ansicht: nur im Browser, keine Änderung an Supabase-Daten.
+const viewStorageKey='wps-event-view-v4.3.14';
+const tableHeaders=Array.from(document.querySelectorAll('#participantTable thead th'));
+const columnNames=tableHeaders.map((th,i)=>{
+ const names=['Nr.','Bearbeiten','Status','Anmeldung','Rechnungsstatus','Rechnungsbetrag','Gutschrift','Infomail','Namensschild','Tischkarte','Anrede','Titel','Vorname','Nachname','Firma','E-Mail','Telefon','r@w Workshop','s@w Konferenz','Dinner','Vortrag','Allergie','Essen','WPS intern','Anmeldung über','Straße','Hausnummer','PLZ','Ort','Anmerkungen','Quelle'];
+ return names[i]||th.textContent.trim();
+});
+let viewSettings={statsVisible:true,importVisible:true,hiddenColumns:[]};
+try{
+ const saved=JSON.parse(localStorage.getItem(viewStorageKey)||'null');
+ if(saved&&typeof saved==='object'){
+  viewSettings.statsVisible=saved.statsVisible!==false;
+   viewSettings.importVisible=saved.importVisible!==false;
+  if(Array.isArray(saved.hiddenColumns))viewSettings.hiddenColumns=saved.hiddenColumns.filter(n=>columnNames.includes(n));
+ }
+}catch(e){console.warn('Ansichtseinstellungen konnten nicht geladen werden.',e)}
+function saveViewSettings(){try{localStorage.setItem(viewStorageKey,JSON.stringify(viewSettings))}catch(e){console.warn('Ansichtseinstellungen konnten nicht gespeichert werden.',e)}}
+function updateStatsVisibility(){
+ $('statsPanel').classList.toggle('hidden',!viewSettings.statsVisible);
+ $('mailPanel').classList.toggle('hidden',!viewSettings.statsVisible||!isAdmin());
+ $('toggleStats').textContent=viewSettings.statsVisible?'Kennzahlen und E-Mail-Bereich ausblenden':'Kennzahlen und E-Mail-Bereich einblenden';
+ $('toggleStats').setAttribute('aria-expanded',String(viewSettings.statsVisible));
+}
+$('toggleStats').addEventListener('click',()=>{viewSettings.statsVisible=!viewSettings.statsVisible;saveViewSettings();updateStatsVisibility()});
+function updateImportVisibility(){
+ const visible=isAdmin()&&viewSettings.importVisible;
+ $('importControls').classList.toggle('hidden',!isAdmin());
+ $('importPanel').classList.toggle('hidden',!visible);
+ $('toggleImport').textContent=viewSettings.importVisible?'Importfunktionen ausblenden':'Importfunktionen einblenden';
+ $('toggleImport').setAttribute('aria-expanded',String(visible));
+}
+$('toggleImport').addEventListener('click',()=>{if(!isAdmin())return;viewSettings.importVisible=!viewSettings.importVisible;saveViewSettings();updateImportVisibility()});
+function applyColumnVisibility(){
+ const hidden=new Set(viewSettings.hiddenColumns);
+ const trs=document.querySelectorAll('#participantTable tr');
+ trs.forEach(tr=>Array.from(tr.children).forEach((cell,i)=>{cell.classList.toggle('column-hidden',hidden.has(columnNames[i]))}));
+ $('columnSummary').textContent=`${columnNames.length-hidden.size} von ${columnNames.length} Spalten sichtbar`;
+}
+function buildColumnPicker(){
+ const target=$('columnOptions');target.replaceChildren();
+ columnNames.forEach((name,i)=>{
+  const label=document.createElement('label'),input=document.createElement('input');
+  input.type='checkbox';input.checked=!viewSettings.hiddenColumns.includes(name);
+  input.setAttribute('aria-label',name+' anzeigen');
+  input.addEventListener('change',()=>{
+   if(!input.checked&&viewSettings.hiddenColumns.length>=columnNames.length-1){input.checked=true;return}
+   viewSettings.hiddenColumns=input.checked?viewSettings.hiddenColumns.filter(n=>n!==name):[...viewSettings.hiddenColumns,name];
+   saveViewSettings();applyColumnVisibility();
+  });
+  label.append(input,document.createTextNode(name));target.appendChild(label);
+ });
+}
+function setColumnPickerOpen(open){
+ $('columnPicker').classList.toggle('hidden',!open);
+ $('toggleColumns').setAttribute('aria-expanded',String(open));
+ $('toggleColumns').textContent=open?'Spalten auswählen ▴':'Spalten auswählen ▾';
+}
+$('toggleColumns').addEventListener('click',()=>setColumnPickerOpen($('columnPicker').classList.contains('hidden')));
+$('closeColumns').addEventListener('click',()=>setColumnPickerOpen(false));
+$('showAllColumns').addEventListener('click',()=>{viewSettings.hiddenColumns=[];saveViewSettings();buildColumnPicker();applyColumnVisibility()});
+updateStatsVisibility();buildColumnPicker();applyColumnVisibility();
+
+function checkinId(k,event){return event+'|'+k}
+async function loadCheckins(){
+ if(!db||!currentUser)return;
+ const {data,error}=await db.from('event_checkins').select('identity_key,event_type,checked_in_at').limit(10000);
+ if(error){$('checkinStatus').textContent='Check-ins konnten nicht geladen werden: '+error.message;return}
+ checkins=new Map((data||[]).map(x=>[checkinId(x.identity_key,x.event_type),x.checked_in_at]));
+ $('checkinStatus').textContent='Anwesenheit zuletzt aktualisiert: '+new Date().toLocaleTimeString('de-DE');
+ renderCheckin();
+}
+function checkinEligible(r,event){return participantStatus(r)==='Angemeldet'&&r[event]==='Ja'}
+function renderCheckin(){
+ const event=$('checkinEvent').value,q=$('checkinSearch').value.trim().toLocaleLowerCase('de'),filter=$('checkinFilter').value;
+ const eligible=rows.filter(r=>checkinEligible(r,event));
+ const done=eligible.filter(r=>checkins.has(checkinId(key(r),event))).length;
+ $('checkinTotal').textContent=eligible.length;$('checkinDone').textContent=done;$('checkinOpen').textContent=eligible.length-done;
+ const visible=eligible.filter(r=>{const checked=checkins.has(checkinId(key(r),event));return (filter==='all'||(filter==='done'?checked:!checked))&&[r.first,r.last,r.company].join(' ').toLocaleLowerCase('de').includes(q)}).sort((a,b)=>{
+  const aDone=checkins.has(checkinId(key(a),event)),bDone=checkins.has(checkinId(key(b),event));
+  return Number(aDone)-Number(bDone)||compareNames(a.last,b.last)||compareNames(a.first,b.first);
+ });
+ $('checkinBody').innerHTML=visible.map(r=>{
+  const k=key(r),timestamp=checkins.get(checkinId(k,event)),checked=!!timestamp;
+  const when=checked?new Date(timestamp).toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}):'';
+  return `<tr class="${checked?'checkin-row-done':''}"><td><strong>${esc([r.title,r.first,r.last].filter(Boolean).join(' '))}</strong></td><td>${esc(r.company||'')}</td><td>${checked?`<span class="mail-sent">✓ Anwesend</span><span class="checkin-time">Check-in: ${esc(when)} Uhr</span>`:'<span class="invoice-hint">Noch offen</span>'}</td><td><button type="button" class="checkin-action ${checked?'done':''}" data-checkin-key="${esc(k)}" ${checkinBusy?'disabled':''}>${checked?'✓ Rückgängig':'Check-in'}</button></td></tr>`;
+ }).join('')||'<tr><td colspan="4">Keine passenden Anmeldungen gefunden.</td></tr>';
+}
+$('toggleCheckin').onclick=()=>{const open=$('checkinPanel').classList.toggle('hidden')===false;$('toggleCheckin').textContent=open?'Check-in schließen':'✓ Check-in öffnen';$('toggleCheckin').setAttribute('aria-expanded',String(open));if(open)loadCheckins()};
+$('checkinEvent').onchange=renderCheckin;$('checkinSearch').oninput=renderCheckin;$('checkinFilter').onchange=renderCheckin;
+$('refreshCheckin').onclick=async()=>{await load();};
+$('checkinBody').onclick=async e=>{
+ const btn=e.target.closest('[data-checkin-key]');if(!btn||checkinBusy||!currentUser||!currentRole)return;
+ const k=btn.dataset.checkinKey,event=$('checkinEvent').value,r=rows.find(x=>key(x)===k);
+ if(!r||!checkinEligible(r,event)){alert('Anmeldung nicht mehr gültig. Bitte aktualisieren.');return}
+ checkinBusy=true;renderCheckin();
+ let completed=false;
+ try{
+  // Erst den aktuellen Datenbankstatus prüfen, damit ein paralleler Check-in nicht versehentlich rückgängig gemacht wird.
+  const {data:existing,error:readError}=await db.from('event_checkins').select('id').eq('identity_key',k).eq('event_type',event).maybeSingle();
+  if(readError)throw readError;
+  if(existing){
+   if(!confirm('Check-in für '+[r.first,r.last].join(' ')+' wirklich zurücknehmen?'))return;
+   const {error}=await db.from('event_checkins').delete().eq('id',existing.id);if(error)throw error;completed=true;
+  }else{
+   const {error}=await db.from('event_checkins').insert({identity_key:k,event_type:event,checked_in_by:currentUser.id});if(error)throw error;completed=true;
+  }
+ }catch(err){alert('Check-in konnte nicht gespeichert werden: '+err.message)}finally{
+  checkinBusy=false;
+  if(completed){$('checkinSearch').value='';$('checkinSearch').focus();}
+  await loadCheckins();
+ }
+};
+function normalizeInternal(){rows.forEach(r=>{let company=(r.company||'').trim().toLowerCase(),email=(r.email||'').trim().toLowerCase();r.internal=(company==='wps'||email.endsWith('@wps.de'))?'Ja':'Nein'})}
+function render(){
+  if(typeof renderBadges==='function')renderBadges();
+ updateSortHeaders();normalizeInternal();const rr=filtered(),active=rows.filter(r=>participantStatus(r)==='Angemeldet');
+ $('tbody').innerHTML=rr.map((r,idx)=>{
+  const eligible=r.internal!=='Ja',planned=hasDisplayedInvoice(r),status=invoiceStatusForDisplay(r),k=esc(key(r)),hint=creditHint(r);
+  const options=invoiceChoices(r).map(v=>`<option value="${v}" ${status===v?'selected':''}>${v}</option>`).join('');
+  const statusCell=eligible&&canChooseInvoiceStatus(r)?`<select class="invoice-status" data-invoice-status="${k}" aria-label="Rechnungsstatus für ${esc(r.first+' '+r.last)}">${options}</select>`:`<span class="tag" title="Rechnungsstatus (nur Anzeige)">${esc(status)}</span>`;
+  const creditCell=hint?`<span class="${hint==='Erledigt'?'credit-done':'credit-warning'}">${hint==='Erledigt'?'✓':'⚠'} ${esc(hint)}</span>`:'';
+  const prepCell=(relevant,done,field)=>!relevant?'<span class="invoice-hint">–</span>':`<input type="checkbox" class="invoice-check" data-prep="${field}" data-prep-key="${k}" aria-label="${field==='badgeReady'?'Namensschild':'Tischkarte'} fertig für ${esc(r.first+' '+r.last)}" ${done?'checked':''} ${canManagePrep()?'':'disabled'}>`;
+   const mailCell=!isAdmin()?'–':!mailEligible(r)?'–':`<button type="button" class="secondary mail-action ${mailDelivery.has(participantIds.get(key(r)))?'sent':''}" data-mail-key="${k}">${mailDelivery.has(participantIds.get(key(r)))?'✓ Versendet':'Mail öffnen'}</button>`;
+   const invoiceCols=`<td>${statusCell}</td><td class="invoice-amount">${planned?eur(invoiceAmount(r)):''}</td><td>${creditCell}</td><td class="mail-column ${isAdmin()?'':'hidden'}">${mailCell}</td><td class="invoice-cell">${prepCell(needsBadge(r),r.badgeReady===true,'badgeReady')}</td><td class="invoice-cell">${prepCell(needsPlace(r),r.placeReady===true,'placeReady')}</td>`;
+  const vals=[participantStatus(r),r.date,r.salutation||'',r.title,r.first,r.last,r.company,r.email,r.phone,r.workshop,r.conference,r.dinner,r.speaker==='Ja'?'Ja':'Nein',r.allergy||'',r.meal,r.internal];
+  const rest=[r.registration,r.street,r.no,r.zip,r.city,r.note,r.filename];
+  return `<tr class="${r._new?'new':''} ${participantStatus(r)==='Abgesagt'?'cancelled':''}"><td><strong>${idx+1}</strong></td><td><button class="secondary editbtn" data-edit="${k}">Bearbeiten</button></td>${vals.slice(0,2).map((v,i)=>`<td>${i===0?'<span class="tag '+(v==='Abgesagt'?'status-cancelled':'')+'">'+esc(v)+'</span>':esc(v)}</td>`).join('')}${invoiceCols}${vals.slice(2).map((v,i)=>`<td>${i===10?(v==='Ja'?'<span class="tag speaker-tag">Vortrag</span>':''):i===10?(v?'<span class="allergy-alert" title="Allergie / Unverträglichkeit">⚠ '+esc(v)+'</span>':''):esc(v)}</td>`).join('')}${rest.map((v,i)=>`<td${i===5?' class="note"':''}>${esc(v)}</td>`).join('')}</tr>`;
+ }).join('');
+ applyColumnVisibility();
+  // Alle Kennzahlen basieren auf derselben gefilterten Liste wie die Tabelle.
+  const count=(items,field,internal)=>items.filter(r=>r[field]==='Ja'&&(internal===undefined||r.internal===internal)).length;
+  $('cAll').textContent=rr.length;
+   const badgePeople=rows.filter(needsBadge),placePeople=rows.filter(needsPlace);
+    if(isAdmin()){const eligibleMail=rows.filter(mailEligible);const sent=eligibleMail.filter(r=>mailDelivery.has(participantIds.get(key(r)))).length;$('mailSummary').textContent=`${sent} von ${eligibleMail.length} Informationsmails als versendet markiert`;}
+   $('badgeProgress').textContent=`${badgePeople.filter(r=>r.badgeReady===true).length} / ${badgePeople.length}`;
+   $('placeProgress').textContent=`${placePeople.filter(r=>r.placeReady===true).length} / ${placePeople.length}`;
+  for(const [field,total,ext,int] of [
+    ['conference','cSaw','cSawExternal','cSawInternal'],
+    ['workshop','cRaw','cRawExternal','cRawInternal'],
+    ['dinner','cDinner','cDinnerExternal','cDinnerInternal']]){
+    $(total).textContent=count(rr,field);
+    $(ext).textContent=count(rr,field,'Nein');
+    $(int).textContent=count(rr,field,'Ja');
+  }
+  $('cMeat').textContent=rr.filter(r=>r.dinner==='Ja'&&r.meal==='Fleisch').length;
+  $('cFish').textContent=rr.filter(r=>r.dinner==='Ja'&&r.meal==='Fisch').length;
+  $('cVeg').textContent=rr.filter(r=>r.dinner==='Ja'&&['Vegetarisch','Vegan'].includes(r.meal)).length;
+  $('cInvoiceOpen').textContent=rr.filter(r=>isInvoiceEligible(r)&&invoiceStatus(r)==='Offen').length;
+  const billed=rr.filter(hasDisplayedInvoice);
+  $('cInvoices').textContent=billed.length;
+  $('cCreditReview').textContent=rows.filter(creditReview).length;
+  $('cInvoiceSum').textContent=eur(billed.reduce((sum,r)=>sum+invoiceAmount(r),0));
+  const cancelled=rr.filter(r=>participantStatus(r)==='Abgesagt').length;
+  $('cancelledStats').classList.toggle('hidden',$('statusFilter').value!=='' );
+  $('cancelledStats').textContent=`Status: alle · ${rr.length-cancelled} angemeldet, ${cancelled} abgesagt. Die Kennzahlen oben enthalten beide Statusgruppen.`;
+ $('status').textContent=`${rr.length} von ${rows.length} Datensätzen angezeigt · ${active.length} aktive Teilnehmer insgesamt. Kennzahlen = aktuelle Filterauswahl.`;
+}
+
+// Kennzahl-Klick: Filter auf die entsprechende Gruppe setzen; andere Filter zur eindeutigen Zuordnung zurücksetzen.
+function selectMetric(metric){
+  const [field,group]=metric.split(':');
+  if(field==='credit'&&group==='review'){for(const id of ['workshopFilter','confFilter','speakerFilter','salutationFilter','dinnerFilter','allergyFilter','internalFilter','registrationFilter','creditFilter','invoiceStatusFilter','invoiceFilter'])$(id).value='';$('search').value='';$('statusFilter').value='';$('creditFilter').value='review';render();document.querySelector('.filters').scrollIntoView({behavior:'smooth',block:'start'});return;}
+  if(!['conference','workshop','dinner'].includes(field))return;
+  $('search').value='';
+  for(const id of ['workshopFilter','confFilter','speakerFilter','salutationFilter','dinnerFilter','allergyFilter','internalFilter','registrationFilter','creditFilter','invoiceStatusFilter','invoiceFilter'])$(id).value='';
+  // Aktuellen Statusfilter beibehalten (auch 'alle' oder 'abgesagt').
+  $(({conference:'confFilter',workshop:'workshopFilter',dinner:'dinnerFilter'})[field]).value='Ja';
+  if(group==='extern')$('internalFilter').value='Nein';
+  if(group==='intern')$('internalFilter').value='Ja';
+  render();
+  document.querySelector('.filters').scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.querySelectorAll('[data-metric]').forEach(el=>{
+  el.addEventListener('click',()=>selectMetric(el.dataset.metric));
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectMetric(el.dataset.metric)}});
+});
+let editOldKey=null,editOpenedVersion=null;const editFields=['status','date','salutation','title','first','last','company','email','phone','workshop','conference','dinner','speaker','allergy','meal','registration','street','no','zip','city','note'];
+function openEditor(k){let r=rows.find(x=>key(x)===k);if(!r)return;$('editorTitle').textContent='Teilnehmer bearbeiten';editOldKey=k;editOpenedVersion=rowVersions.get(k);for(let f of editFields){let el=$('e_'+f);if(el){el.value=f==='salutation'?(r.salutation==='Herr'||r.salutation==='Frau'?r.salutation:''):f==='status'?participantStatus(r):f==='speaker'?(r.speaker==='Ja'?'Ja':'Nein'):(r[f]??'');el.disabled=!canEditParticipant();}} $('invoiceEditFields').classList.toggle('hidden',r.internal==='Ja');$('e_invoiceAmount').disabled=!canInvoice();$('e_invoiceStatus').disabled=!canChooseInvoiceStatus(r);$('e_invoiceStatus').innerHTML=(canChooseInvoiceStatus(r)?invoiceChoices(r):[invoiceStatus(r)]).map(v=>`<option>${esc(v)}</option>`).join('');$('invoiceHistory').innerHTML=historyMarkup(k);$('editDelete').classList.toggle('hidden',!isAdmin());$('e_invoiceStatus').value=invoiceStatus(r);$('e_invoiceAmount').value=invoiceAmount(r).toFixed(2);$('invoiceHint').textContent='Reguläre Schutzgebühr: '+eur(invoiceBase(r))+' · Betrag individuell anpassbar. Bei Absage bleibt der Rechnungsstatus erhalten; nach Erstellung einer Gutschrift bitte „Gutschrift erstellt“ auswählen.';$('editModal').classList.remove('hidden')}
+let creatingParticipant=false;
+function openNewParticipant(){
+ if(!isAdmin())return;
+ creatingParticipant=true;editOldKey=null;editOpenedVersion=null;
+ $('editorTitle').textContent='Teilnehmer hinzufügen';
+ for(const f of editFields){const el=$('e_'+f);if(!el)continue;el.disabled=false;el.value=(['workshop','conference','dinner','speaker'].includes(f)?'Nein':f==='status'?'Angemeldet':f==='registration'?'Manuell':f==='date'?new Date().toLocaleString('de-DE'):'')}
+ $('e_invoiceStatus').value='Offen';$('e_invoiceAmount').value='0.00';$('invoiceHint').textContent='Rechnungsbetrag bei Bedarf eintragen und Rechnung vorgesehen aktivieren.';
+ $('invoiceEditFields').classList.remove('hidden');$('e_invoiceAmount').disabled=false;$('e_invoiceStatus').disabled=false;$('e_invoiceStatus').innerHTML=invoiceChoices({}).map(v=>`<option>${esc(v)}</option>`).join('');$('invoiceHistory').innerHTML='';$('editDelete').classList.add('hidden');$('editModal').classList.remove('hidden');$('e_first').focus();
+}
+$('addParticipant').onclick=openNewParticipant;
+function closeEditor(){$('editModal').classList.add('hidden');editOldKey=null;editOpenedVersion=null;creatingParticipant=false}
+$('tbody').addEventListener('change',async e=>{
+ const control=e.target.closest('[data-invoice-status]');if(!control)return;
+ if(!canInvoice()&&currentRole!=='event_team'){render();return}
+ const r=rows.find(x=>key(x)===control.dataset.invoiceStatus);if(!r||!canChooseInvoiceStatus(r)){render();return}
+ const updated={...r,invoiceStatus:control.value,invoicePlanned:['Rechnung vorgesehen','Rechnung versendet','Rechnung bezahlt'].includes(control.value)};
+ control.disabled=true;
+ try{await saveExisting(key(r),updated);await load()}
+ catch(err){alert('Rechnungsstatus konnte nicht gespeichert werden: '+err.message);await load()}
+});
+$('tbody').addEventListener('change',async e=>{
+ const el=e.target.closest('[data-prep]');if(!el)return;
+ const field=el.dataset.prep,keyValue=el.dataset.prepKey;
+ const original=rows.find(r=>key(r)===keyValue);
+ if(!canManagePrep()||!original||!['badgeReady','placeReady'].includes(field)||!(field==='badgeReady'?needsBadge(original):needsPlace(original))){render();return}
+ el.disabled=true;
+ try{await saveExisting(keyValue,{...original,[field]:el.checked});await load();$('status').textContent='Organisationsstatus zentral gespeichert.'}
+ catch(err){alert('Status konnte nicht gespeichert werden: '+err.message);await load()}
+});
+document.querySelectorAll('[data-prep-metric]').forEach(el=>{
+ const run=()=>{const badge=el.dataset.prepMetric==='badge';$('badgeFilter').value=badge?'open':'';$('placeFilter').value=badge?'':'open';$('statusFilter').value='Angemeldet';$('search').value='';for(const id of ['workshopFilter','confFilter','speakerFilter','salutationFilter','dinnerFilter','allergyFilter','internalFilter','registrationFilter','creditFilter','invoiceStatusFilter','invoiceFilter'])$(id).value='';render();document.querySelector('.filters').scrollIntoView({behavior:'smooth',block:'start'})};
+ el.addEventListener('click',run);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();run()}});
+});
+$('tbody').addEventListener('click',e=>{let b=e.target.closest('[data-edit]');if(b)openEditor(b.dataset.edit)});$('editCancel').onclick=closeEditor;$('editModal').addEventListener('click',e=>{if(e.target.id==='editModal')closeEditor()});
+$('editDelete').onclick=async()=>{if(!editOldKey||!isAdmin())return;const k=editOldKey;const r=rows.find(x=>key(x)===k);if(!r)return;const label=[r.first,r.last].filter(Boolean).join(' ');const ok=confirm('Teilnehmer „'+label+'“ wirklich dauerhaft löschen?\n\nDer Datensatz wird für alle Benutzer aus Supabase entfernt. Diese Aktion kann nur über ein Backup rückgängig gemacht werden.');if(!ok)return;const btn=$('editDelete');btn.disabled=true;try{const {data,error}=await db.from('event_registrations').delete().eq('identity_key',k).select('identity_key');if(error)throw error;if(!data||!data.some(x=>x.identity_key===k))throw new Error('Der Datensatz konnte nicht gelöscht werden. Bitte Berechtigungen prüfen.');closeEditor();await load();$('status').textContent='Teilnehmer „'+label+'“ wurde zentral gelöscht.'}catch(e){alert('Löschen fehlgeschlagen: '+e.message)}finally{btn.disabled=false}};
+$('editSave').onclick=async()=>{
+ if(!editOldKey&&!creatingParticipant)return;
+ let i=creatingParticipant?-1:rows.findIndex(x=>key(x)===editOldKey);if(i<0&&!creatingParticipant)return;
+ let original=creatingParticipant?{source:'Manuell',filename:'',_new:true}: {...rows[i]},updated={...original};
+ if(canEditParticipant()){
+  for(let f of editFields){let el=$('e_'+f);if(el)updated[f]=el.value.trim()}
+  updated.internal=((updated.company||'').trim().toLowerCase()==='wps'||(updated.email||'').trim().toLowerCase().endsWith('@wps.de'))?'Ja':'Nein';
+ }
+ if(canInvoice()||(currentRole==='event_team'&&canChooseInvoiceStatus(original))){
+  updated.invoiceStatus=$('e_invoiceStatus').value;updated.invoicePlanned=['Rechnung vorgesehen','Rechnung versendet','Rechnung bezahlt'].includes(updated.invoiceStatus);
+  if(canInvoice())updated.invoiceAmount=Number($('e_invoiceAmount').value);
+  if(canInvoice()&&(!Number.isFinite(updated.invoiceAmount)||updated.invoiceAmount<0)){alert('Bitte einen gültigen Rechnungsbetrag eingeben.');return}
+ }
+ if(updated.internal==='Ja'&&canEditParticipant()&&!original.invoiceProcessLocked){updated.invoicePlanned=false;updated.invoiceStatus='Keine Rechnung';}
+ let newKey=key(updated);
+ if(creatingParticipant){
+  if(!normMatch(updated.first)||!normMatch(updated.last)||!normMatch(updated.email)){alert('Bitte Vorname, Nachname und E-Mail-Adresse eingeben.');return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(updated.email)){alert('Bitte eine gültige E-Mail-Adresse eingeben.');return}
+  if(rows.some(r=>key(r)===newKey)){alert('Diese Person ist bereits vorhanden. Bitte den bestehenden Datensatz bearbeiten.');return}
+ }else if(!newKey||newKey==='||'){alert('Für die Zuordnung werden mindestens E-Mail oder Name benötigt.');return}
+ try{$('editSave').disabled=true;if(creatingParticipant){await insertNewRow(updated)}else{await saveExisting(editOldKey,updated,editOpenedVersion)}closeEditor();await load();$('status').textContent='Teilnehmerdaten wurden zentral gespeichert.'}
+ catch(e){alert('Änderung konnte nicht gespeichert werden: '+e.message)}
+ finally{$('editSave').disabled=false}
+};
+function excelSafeHouseNumber(v){let s=String(v??'');return /^\s*\d+\s*[-–]\s*\d+\s*$/.test(s)?'\t'+s:s} function csv(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}$('export').onclick=()=>{if(!isAdmin())return;let heads=['Status','Anmeldung','Anrede','Titel','Vorname','Nachname','Firma','E-Mail','Telefon','r@w Workshop','s@w Konferenz','Dinner','Vortrag','Allergie','Essenswunsch','WPS intern','Rechnungsstatus','Rechnung vorgesehen','Rechnungsbetrag EUR','Gutschrift','Anmeldung über','Straße','Hausnummer','PLZ','Ort','Anmerkungen','Quelle'];let ks=['status','date','salutation','title','first','last','company','email','phone','workshop','conference','dinner','speaker','allergy','meal','internal','invoiceStatus','invoicePlanned','invoiceAmount','creditHint','registration','street','no','zip','city','note','filename'];let out=[heads.map(csv).join(';'),...filtered().map(r=>ks.map(k=>csv(k==='no' ? excelSafeHouseNumber(r.no) : k==='speaker'?(r.speaker==='Ja'?'Ja':'Nein'):k==='invoiceStatus'?invoiceStatusForDisplay(r):k==='creditHint'?creditHint(r):k==='invoicePlanned'?(r.internal==='Ja'?'':hasDisplayedInvoice(r)?'Ja':'Nein'):k==='invoiceAmount'?(r.internal==='Ja'||!hasDisplayedInvoice(r)?'':invoiceAmount(r).toFixed(2).replace('.',',')):(r[k]??(k==='status'?participantStatus(r):'')))).join(';'))].join('\r\n');download(new Blob(['\ufeff'+out],{type:'text/csv;charset=utf-8'}),'WPS_Event_Anmeldungen.csv')};// XLSX exportiert ausschließlich die aktuell gefilterten Teilnehmer, ohne Datenbankänderung.
+$('exportXlsx').onclick=async()=>{
+ const btn=$('exportXlsx');
+ if(!currentUser||!currentRole)return;
+ await loadCheckins();
+ if(!window.ExcelJS){alert('Excel-Export konnte nicht geladen werden. Bitte Internetverbindung prüfen und Seite neu laden.');return}
+ btn.disabled=true;
+ try{
+  const heads=['Status','Anmeldung','Anrede','Titel','Vorname','Nachname','Firma','E-Mail','Telefon','r@w Workshop','s@w Konferenz','Dinner','Vortrag','Allergie','Essenswunsch','WPS intern','Rechnungsstatus','Rechnung vorgesehen','Rechnungsbetrag EUR','Gutschrift','Anmeldung über','Straße','Hausnummer','PLZ','Ort','Anmerkungen','Quelle','Check-in Workshop','Check-in Dinner','Check-in Konferenz'];
+  const ks=['status','date','salutation','title','first','last','company','email','phone','workshop','conference','dinner','speaker','allergy','meal','internal','invoiceStatus','invoicePlanned','invoiceAmount','creditHint','registration','street','no','zip','city','note','filename','checkin_workshop','checkin_dinner','checkin_conference'];
+  const book=new ExcelJS.Workbook();book.creator='WPS Event-Anmeldungen';
+  const sheet=book.addWorksheet('Teilnehmer',{views:[{state:'frozen',ySplit:1}]});
+  sheet.addRow(heads);
+  const header=sheet.getRow(1);header.height=29;
+  header.eachCell(c=>{c.font={bold:true,color:{argb:'FFFFFFFF'}};c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF092D4A'}};c.alignment={horizontal:'left',vertical:'middle',wrapText:true};});
+  for(const r of filtered()){
+   const values=ks.map(k=>{
+    if(k.startsWith('checkin_')){const ev=k.slice(8);return checkinEligible(r,ev)?(checkins.has(checkinId(key(r),ev))?'Anwesend':'Offen'):'–'}
+    if(k==='speaker')return r.speaker==='Ja'?'Ja':'Nein';
+    if(k==='invoiceStatus')return invoiceStatusForDisplay(r);
+    if(k==='creditHint')return creditHint(r);
+    if(k==='invoicePlanned')return r.internal==='Ja'?'':hasDisplayedInvoice(r)?'Ja':'Nein';
+    if(k==='invoiceAmount')return r.internal==='Ja'||!hasDisplayedInvoice(r)?null:invoiceAmount(r);
+    if(k==='status')return participantStatus(r);
+    return String(r[k]??'');
+   });
+   const row=sheet.addRow(values);
+   row.eachCell({includeEmpty:true},(c,col)=>{
+    c.alignment={horizontal:col===18?'right':'left',vertical:'middle'};
+    if(col===18&&typeof c.value==='number')c.numFmt='#,##0.00 "€"';
+    if(row.number%2===0)c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFF0F6F8'}};
+   });
+  }
+  sheet.columns.forEach((col,i)=>{col.width=Math.min(46,Math.max(14,heads[i].length+4));});
+  sheet.getColumn(7).width=32;sheet.getColumn(25).width=40;
+  sheet.autoFilter={from:{row:1,column:1},to:{row:Math.max(1,sheet.rowCount),column:heads.length}};
+  const buffer=await book.xlsx.writeBuffer();
+  download(new Blob([buffer],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),'WPS_Event_Anmeldungen.xlsx');
+ }catch(err){console.error('XLSX-Export:',err);alert('Excel-Export fehlgeschlagen: '+err.message)}finally{btn.disabled=false}
+};
+function download(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+$('backup').onclick=()=>download(new Blob([JSON.stringify(rows,null,2)],{type:'application/json'}),'WPS_Event_Anmeldungen_Backup.json');$('restoreBtn').onclick=()=>{if(!isAdmin())return;$('restoreInput').click()};$('restoreInput').onchange=async e=>{if(!isAdmin())return;try{let imported=JSON.parse(await e.target.files[0].text());if(!Array.isArray(imported))throw new Error('Ungültiges Backup');await upsertRows(imported);await load();$('status').textContent='Backup in die zentrale Datenbank übernommen.'}catch(x){alert('Backup konnte nicht übernommen werden: '+x.message)}};$('clear').onclick=async()=>{if(!isAdmin())return;if(confirm('Wirklich ALLE Teilnehmer zentral löschen? Dies betrifft alle Benutzer.')){let {error}=await db.from('event_registrations').delete().neq('identity_key','__never__');if(error)alert(error.message);else{rows=[];render()}}};
+['search','statusFilter','workshopFilter','confFilter','speakerFilter','salutationFilter','dinnerFilter','allergyFilter','internalFilter','registrationFilter','creditFilter','invoiceStatusFilter','invoiceFilter','badgeFilter','placeFilter','mailFilter'].forEach(id=>$(id).addEventListener('input',render));let drop=$('drop'),inp=$('emlInput');drop.onclick=()=>{if(isAdmin())inp.click()};inp.onchange=e=>{if(isAdmin())addFiles(e.target.files);e.target.value=''};['dragenter','dragover'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.add('over')}));['dragleave','drop'].forEach(x=>drop.addEventListener(x,e=>{e.preventDefault();drop.classList.remove('over')}));drop.addEventListener('drop',e=>{if(isAdmin())addFiles(e.dataTransfer.files)});
+
+let oneDriveHandle=null;const oneDriveSeen=new Map();
+$('chooseOneDrive').onclick=async()=>{
+ if(!isAdmin())return;
+ if(!window.showDirectoryPicker){$('oneDriveState').textContent='Bitte Google Chrome über HTTPS verwenden.';return}
+ try{
+  const handle=await window.showDirectoryPicker({mode:'read'});
+  if(handle.name!=='WPS-Event-Anmeldungen'){$('oneDriveState').textContent='Nur WPS-Event-Anmeldungen auswählen.';return}
+  oneDriveHandle=handle;oneDriveSeen.clear();$('readOneDrive').disabled=false;
+  $('oneDriveState').textContent='OneDrive-Ordner: '+handle.name;
+ }catch(e){if(e.name!=='AbortError')$('oneDriveState').textContent='Ordnerauswahl fehlgeschlagen: '+e.message}
+};
+$('readOneDrive').onclick=async()=>{
+ if(!isAdmin()||!oneDriveHandle)return;
+ const btn=$('readOneDrive');btn.disabled=true;
+ try{
+  let files=[],skipped=0;
+  for await(const [name,handle] of oneDriveHandle.entries()){
+   if(handle.kind!=='file'||!name.toLowerCase().endsWith('.eml'))continue;
+   const f=await handle.getFile(),sig=f.size+':'+f.lastModified;
+   if(oneDriveSeen.get(name)===sig){skipped++;continue}files.push(f);
+  }
+  if(!files.length){$('oneDriveState').textContent='Keine neuen Dateien · '+skipped+' in dieser Sitzung übersprungen.';return}
+  const ok=await addFiles(files);
+  if(ok){for(const f of files)oneDriveSeen.set(f.name,f.size+':'+f.lastModified);$('oneDriveState').textContent=files.length+' Datei(en) verarbeitet · '+skipped+' übersprungen.'}
+  else $('oneDriveState').textContent='Import unvollständig. Bitte Statusmeldung prüfen.';
+ }catch(e){$('oneDriveState').textContent='Ordnerlesen fehlgeschlagen: '+e.message}
+ finally{btn.disabled=false}
+};
+
+// Event-Infomails: ausschließlich Administratoren; Supabase-RLS erzwingt Berechtigungen serverseitig.
+const MAIL_DEFAULTS={
+ conference:{subject:'Nicht vergessen: software@work 2026',body:`wir freuen uns sehr, Sie am Freitag, den 6. November 2026, zur software@work Konferenz im Hotel Hafen Hamburg, Seewartenstraße 9, 20459 Hamburg, begrüßen zu dürfen.
+
+Die Veranstaltung beginnt um 09:00 Uhr, Einlass ist ab 08:30 Uhr.
+
+Falls Ihnen terminlich doch etwas dazwischenkommen sollte, würden wir uns freuen, wenn Sie uns kurz unter info@softwareatwork.de Bescheid geben.
+
+Sofern Sie noch Fragen zur software@work Konferenz haben, können Sie mich gerne per Mail oder telefonisch kontaktieren.`},
+ dinner:{subject:'Nicht vergessen: software@work 2026',body:`wir freuen uns sehr, Sie am Donnerstag, den 5. November 2026, zum Dinner im Restaurant Parkview des Hotels The Fontenay, Fontenay 10, 20354 Hamburg, begrüßen zu dürfen.
+
+Die Veranstaltung beginnt um 18:00 Uhr mit einem Begrüßungsempfang und das Dinner wird um 19:00 Uhr serviert. Dresscode: Business Casual.
+
+Falls Ihnen terminlich doch etwas dazwischenkommen sollte, würden wir uns freuen, wenn Sie uns kurz unter info@softwareatwork.de Bescheid geben.
+
+Sofern Sie noch Fragen zum Dinner oder zur software@work Konferenz am 6. November 2026 (Einlass 08:30 Uhr, Beginn 09:00 Uhr) haben, können Sie mich gerne per Mail oder telefonisch kontaktieren.`}
+};
+function mailEligible(r){return participantStatus(r)==='Angemeldet'&&(r.conference==='Ja'||r.dinner==='Ja')}
+function mailTemplateKey(r){return r.dinner==='Ja'?'dinner':'conference'}
+function mailSalutation(r){
+ const last=String(r.last||'').trim(),first=String(r.first||'').trim();
+ const title=String(r.title||'').trim().replace(/[,;]+$/,'');
+ const full=[title,last].filter(Boolean).join(' ');
+ if(r.salutation==='Herr'&&last)return 'Lieber Herr '+full+',';
+ if(r.salutation==='Frau'&&last)return 'Liebe Frau '+full+',';
+ return 'Guten Tag '+[title,first,last].filter(Boolean).join(' ')+',';
+}
+async function loadMailData(){
+ mailDelivery=new Map();mailTemplates=new Map();
+ if(!isAdmin())return;
+ const [t,d]=await Promise.all([
+  db.from('event_mail_templates').select('template_key,subject,body'),
+  db.from('event_mail_delivery').select('participant_id,sent_at,sent_by,template_key')
+ ]);
+ if(t.error||d.error){console.error('Mailverwaltung:',t.error||d.error);$('mailSummary').textContent='Mailverwaltung nicht verfügbar: '+(t.error||d.error).message;return;}
+ for(const x of t.data||[])mailTemplates.set(x.template_key,x);
+ for(const x of d.data||[])mailDelivery.set(x.participant_id,x);
+}
+let mailModalMode='',mailModalKey='',mailModalPerson='';
+function closeMailModal(){$('mailModal').classList.add('hidden');mailModalMode='';mailModalKey='';mailModalPerson=''}
+$('mailClose').onclick=closeMailModal;
+$('mailModal').addEventListener('click',e=>{if(e.target.id==='mailModal')closeMailModal()});
+function editMailTemplate(k){
+ if(!isAdmin())return;
+ mailModalMode='template';mailModalKey=k;
+ const t=mailTemplates.get(k)||MAIL_DEFAULTS[k];
+ $('mailModalTitle').textContent='Mailvorlage: '+(k==='dinner'?'Dinner & Konferenz':'Konferenz');
+ $('mailModalHint').textContent='Zentral für alle Administratoren. Die persönliche Anrede wird nicht in dieser Vorlage gespeichert.';
+ $('mailSubject').value=t.subject||MAIL_DEFAULTS[k].subject;
+ $('mailBody').value=t.body||MAIL_DEFAULTS[k].body;
+ $('mailTemplateEditor').classList.remove('hidden');$('mailPreview').classList.add('hidden');
+ $('mailSaveTemplate').classList.remove('hidden');$('mailOpenOutlook').classList.add('hidden');$('mailMarkSent').classList.add('hidden');$('mailUndoSent').classList.add('hidden');
+ $('mailModal').classList.remove('hidden');
+}
+$('editMailConference').onclick=()=>editMailTemplate('conference');
+$('editMailDinner').onclick=()=>editMailTemplate('dinner');
+$('mailSaveTemplate').onclick=async()=>{
+ if(!isAdmin()||mailModalMode!=='template')return;
+ const k=mailModalKey,subject=$('mailSubject').value.trim(),body=$('mailBody').value.trim();
+ if(!subject||!body){alert('Bitte Betreff und Text ausfüllen.');return;}
+ const btn=$('mailSaveTemplate');btn.disabled=true;
+ try{const {error}=await db.from('event_mail_templates').upsert({template_key:k,subject,body,updated_at:new Date().toISOString()},{onConflict:'template_key'});if(error)throw error;await loadMailData();closeMailModal();alert('Mailvorlage zentral gespeichert.');}
+ catch(e){alert('Speichern fehlgeschlagen: '+e.message)}finally{btn.disabled=false}
+};
+function openMailPreview(k){
+ if(!isAdmin())return;
+ const r=rows.find(x=>key(x)===k);
+ if(!r||!mailEligible(r)||!participantIds.get(k)){alert('Keine aktive Konferenz-/Dinneranmeldung oder Teilnehmer-ID fehlt.');return;}
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(r.email||''))){alert('Bitte zuerst die E-Mail-Adresse prüfen.');return;}
+ const templateKey=mailTemplateKey(r),t=mailTemplates.get(templateKey)||MAIL_DEFAULTS[templateKey];
+ if(!t.body?.trim()){alert('Bitte zuerst die Mailvorlage speichern.');return;}
+ mailModalMode='preview';mailModalKey=k;mailModalPerson=participantIds.get(k);
+ $('mailModalTitle').textContent='Informationsmail · '+[r.first,r.last].filter(Boolean).join(' ');
+ $('mailModalHint').textContent='Vorlage: '+(templateKey==='dinner'?'Dinner & Konferenz':'Konferenz')+(!r.salutation?' · Achtung: Anrede fehlt, bitte kontrollieren!':'');
+ $('mailTo').value=r.email;$('mailPreviewSubject').value=t.subject;
+ $('mailPreviewBody').textContent=mailSalutation(r)+'\n\n'+t.body.trim();
+ $('mailTemplateEditor').classList.add('hidden');$('mailPreview').classList.remove('hidden');$('mailSaveTemplate').classList.add('hidden');
+ $('mailOpenOutlook').classList.remove('hidden');
+ const sent=mailDelivery.has(mailModalPerson);
+ $('mailMarkSent').classList.toggle('hidden',sent);$('mailUndoSent').classList.toggle('hidden',!sent);
+ $('mailModal').classList.remove('hidden');
+}
+$('tbody').addEventListener('click',e=>{const b=e.target.closest('[data-mail-key]');if(b)openMailPreview(b.dataset.mailKey)});
+$('mailOpenOutlook').onclick=()=>{
+ if(!isAdmin()||mailModalMode!=='preview')return;
+ const url='mailto:'+encodeURIComponent($('mailTo').value)+'?subject='+encodeURIComponent($('mailPreviewSubject').value)+'&body='+encodeURIComponent($('mailPreviewBody').textContent);
+ window.location.href=url;
+};
+$('mailMarkSent').onclick=async()=>{
+ if(!isAdmin()||mailModalMode!=='preview'||!mailModalPerson)return;
+ if(!confirm('Hast Du diese E-Mail tatsächlich in Outlook versendet?'))return;
+ const btn=$('mailMarkSent');btn.disabled=true;
+ try{
+  const r=rows.find(x=>key(x)===mailModalKey);if(!r)throw new Error('Teilnehmer nicht mehr gefunden');
+  const {error}=await db.from('event_mail_delivery').insert({participant_id:mailModalPerson,template_key:mailTemplateKey(r),sent_by:currentUser.id});if(error)throw error;
+  await loadMailData();closeMailModal();render();
+ }catch(e){alert('Versandstatus konnte nicht gespeichert werden: '+e.message)}finally{btn.disabled=false}
+};
+$('mailUndoSent').onclick=async()=>{
+ if(!isAdmin()||mailModalMode!=='preview'||!mailModalPerson||!confirm('Versandstatus für diesen Teilnehmer wirklich zurücksetzen?'))return;
+ const btn=$('mailUndoSent');btn.disabled=true;
+ try{const {error}=await db.from('event_mail_delivery').delete().eq('participant_id',mailModalPerson);if(error)throw error;await loadMailData();closeMailModal();render()}
+ catch(e){alert('Zurücksetzen fehlgeschlagen: '+e.message)}finally{btn.disabled=false}
+};
+
+
+// Namensschilder: lokale Druckansicht, keine Änderungen an Supabase.
+const badgeLogoData='data:image/png;base64,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';
+const roadsBadgeLogoData='data:image/png;base64,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';
+let badgeSelection=new Set();
+function badgeRole(r){return r.speaker==='Ja'?'speaker':r.internal==='Ja'?'staff':'guest'}
+function badgeCandidates(){const ev=$('badgeEvent').value;return rows.filter(r=>participantStatus(r)==='Angemeldet'&&r[ev]==='Ja').sort((a,b)=>compareNames(a.last,b.last)||compareNames(a.first,b.first)||compareNames(a.company,b.company))}
+function badgeVisible(){const q=$('badgeSearch').value.trim().toLocaleLowerCase('de'),role=$('badgeRoleFilter').value;return badgeCandidates().filter(r=>(role==='all'||badgeRole(r)===role)&&[r.first,r.last,r.company].join(' ').toLocaleLowerCase('de').includes(q))}
+function renderBadges(){if(!$('badgePanel')||$('badgePanel').classList.contains('hidden'))return;const candidates=badgeCandidates(),visible=badgeVisible(),valid=new Set(candidates.map(key));badgeSelection=new Set([...badgeSelection].filter(k=>valid.has(k)));$('badgeCount').textContent=`${badgeSelection.size} von ${candidates.length} Teilnehmern ausgewählt · ${visible.length} sichtbar`;$('badgeList').innerHTML=visible.length?visible.map(r=>{const k=key(r),role=badgeRole(r),tag=role==='guest'?'':`<span class="badge-tag ${role==='staff'?'staff':''}">${role.toUpperCase()}</span>`;return `<label class="badge-item"><input type="checkbox" data-badge-key="${esc(k)}" ${badgeSelection.has(k)?'checked':''}><span style="flex:1"><strong>${esc([r.title,r.first,r.last].filter(Boolean).join(' '))}</strong> <small>· ${esc(r.company||'')}</small></span>${tag}</label>`}).join(''):'<p style="padding:12px">Keine passenden Teilnehmer.</p>'}
+$('toggleBadges').onclick=()=>{const open=$('badgePanel').classList.toggle('hidden')===false;$('toggleBadges').textContent=open?'Namensschilder schließen':'▤ Namensschilder drucken';$('toggleBadges').setAttribute('aria-expanded',String(open));if(open){badgeSelection=new Set(badgeCandidates().map(key));renderBadges()}};
+$('badgeEvent').onchange=()=>{badgeSelection=new Set(badgeCandidates().map(key));renderBadges()};$('badgeSearch').oninput=renderBadges;$('badgeRoleFilter').onchange=renderBadges;
+$('badgeList').onchange=e=>{const k=e.target.dataset.badgeKey;if(!k)return;if(e.target.checked)badgeSelection.add(k);else badgeSelection.delete(k);renderBadges()};
+$('badgeSelectAll').onclick=()=>{badgeSelection=new Set(badgeCandidates().map(key));renderBadges()};$('badgeSelectVisible').onclick=()=>{badgeVisible().forEach(r=>badgeSelection.add(key(r)));renderBadges()};$('badgeSelectNone').onclick=()=>{badgeSelection.clear();renderBadges()};
+for(let i=0;i<12;i++){const o=document.createElement('option');o.value=String(i);o.textContent=i===0?'0 – Neuer Bogen':`${i} – Erste ${i} Felder überspringen`;$('badgeOffset').appendChild(o)}
+function badgeMarkup(r){if(!r)return '<div class="badge empty"></div>';const role=badgeRole(r),tag=role==='guest'?'':`<span class="badge-role ${role}">${role.toUpperCase()}</span>`;const name=[r.first,r.last].filter(Boolean).join(' ').trim();const title=String(r.title||'').trim();const long=name.length>31?' very-long':name.length>23?' long':'';return `<div class="badge"><div class="badge-top">${tag}<img src="${$('badgeEvent').value==='workshop'?roadsBadgeLogoData:badgeLogoData}" alt="${$('badgeEvent').value==='workshop'?'ROADS':'WPS'}"></div><div class="badge-person">${title?`<div class="badge-academic">${esc(title)}</div>`:''}<div class="badge-name${long}">${esc(name)}</div><div class="badge-company">${esc(r.company||'')}</div></div><div class="badge-accent ${role==='speaker'?'speaker':''}"></div></div>`}
+
+// Echte PDF-Datei, unabhängig vom Browser-Druckdialog.
+$('badgePdf').onclick=()=>{
+ const people=badgeCandidates().filter(r=>badgeSelection.has(key(r)));
+ if(!people.length){alert('Bitte mindestens eine Person auswählen.');return}
+ if(!window.jspdf?.jsPDF){alert('Die PDF-Bibliothek konnte nicht geladen werden. Bitte Internetverbindung prüfen und Seite neu laden.');return}
+ const btn=$('badgePdf');btn.disabled=true;
+ try{
+  const doc=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4',compress:true});
+  const offset=Number($('badgeOffset').value)||0;
+  const cells=[...Array(offset).fill(null),...people];
+  const logo=$('badgeEvent').value==='workshop'?roadsBadgeLogoData:badgeLogoData;
+  const ink=[16,24,40],teal=[53,182,192],grey=[94,104,119];
+  const textFit=(text,maxWidth,size,minSize)=>{
+   doc.setFont('helvetica','bold');let fs=size;
+   while(fs>minSize&&doc.getTextWidth(text)*fs/doc.getFontSize()>maxWidth)fs-=.5;
+   doc.setFontSize(fs);return fs;
+  };
+  for(let i=0;i<cells.length;i++){
+   if(i>0&&i%12===0)doc.addPage();
+   const r=cells[i];if(!r)continue;
+   const col=(i%12)%2,row=Math.floor((i%12)/2),x=30+75*col,y=28.5+40*row;
+   const role=badgeRole(r);
+   if(role!=='guest'){
+    doc.setFillColor(...(role==='speaker'?ink:teal));doc.roundedRect(x+4.5,y+3.6,role==='speaker'?22:17,6,1,1,'F');
+    doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(255,255,255);
+    doc.text(role.toUpperCase(),x+7,y+7.65);
+   }
+   // Logo proportional im rechten oberen Feld (20 × 7 mm).
+   const props=doc.getImageProperties(logo);const ratio=props.width/props.height;
+   const lw=Math.min(20,7*ratio),lh=lw/ratio;
+   doc.addImage(logo,'PNG',x+75-4.5-lw,y+3.6,lw,lh);
+   doc.setTextColor(...ink);
+   const title=String(r.title||'').trim();
+   const name=[r.first,r.last].filter(Boolean).join(' ').trim();
+   // Schriftgröße anhand der tatsächlichen PDF-Schriftbreite bestimmen.
+   // Akademische Titel stehen separat und kleiner über dem Namen.
+   const available=66;
+   const fitLines=(value,size)=>{doc.setFont('helvetica','bold');doc.setFontSize(size);return doc.splitTextToSize(value,available)};
+   let nameSize=14,displayLines=fitLines(name,nameSize);
+   while((displayLines.length>2||displayLines.some(line=>doc.getTextWidth(line)>available))&&nameSize>9){nameSize-=.5;displayLines=fitLines(name,nameSize)}
+   // Bei langen Namen bereits etwas kleiner beginnen, um unruhige Umbrüche zu vermeiden.
+   if(name.length>31&&nameSize>11){nameSize=11;displayLines=fitLines(name,nameSize)}
+   else if(name.length>23&&nameSize>12.5){nameSize=12.5;displayLines=fitLines(name,nameSize)}
+   const twoLines=displayLines.length>1;
+   const baseY=twoLines?y+21:y+23;
+   if(title){doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...grey);doc.text(title,x+4.5,baseY-5.1,{maxWidth:available});}
+   doc.setFont('helvetica','bold');doc.setFontSize(nameSize);doc.setTextColor(...ink);
+   const step=nameSize*.3528*1.14;
+   displayLines.slice(0,2).forEach((line,j)=>doc.text(line,x+4.5,baseY+j*step));
+   const company=String(r.company||'').trim();
+   if(company){doc.setFont('helvetica','normal');doc.setTextColor(...grey);doc.setFontSize(9);
+    const companyLines=doc.splitTextToSize(company,65).slice(0,2);
+    const companyY=twoLines?y+31:y+29;
+    companyLines.forEach((line,j)=>doc.text(line,x+4.5,companyY+j*3.4));
+   }
+   doc.setFillColor(...(role==='speaker'?ink:teal));doc.rect(x+4.5,y+36.5,66,.8,'F');
+  }
+  const event=$('badgeEvent').value;
+  doc.save(`WPS_Namensschilder_${event}_${new Date().toISOString().slice(0,10)}.pdf`);
+ }catch(e){console.error('PDF-Erstellung:',e);alert('PDF konnte nicht erstellt werden: '+e.message)}
+ finally{btn.disabled=false}
+};
+$('badgePrint').onclick=()=>{const people=badgeCandidates().filter(r=>badgeSelection.has(key(r)));if(!people.length){alert('Bitte mindestens eine Person auswählen.');return}const offset=Number($('badgeOffset').value)||0;const cells=[...Array(offset).fill(null),...people],pages=[];for(let i=0;i<cells.length;i+=12){const chunk=cells.slice(i,i+12);while(chunk.length<12)chunk.push(null);pages.push(chunk)}const html=`<!doctype html><html lang="de"><head><meta charset="utf-8"><title>WPS Namensschilder – ${esc($('badgeEvent').selectedOptions[0].textContent)}</title><style>@page{size:A4 portrait;margin:0}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#101828;font-family:Arial,Helvetica,sans-serif}.sheet{width:210mm;height:297mm;padding:28.5mm 30mm;display:grid;grid-template-columns:75mm 75mm;grid-template-rows:repeat(6,40mm);break-after:page;page-break-after:always}.sheet:last-child{break-after:auto;page-break-after:auto}.badge{width:75mm;height:40mm;position:relative;overflow:hidden;padding:3.6mm 4.5mm 3mm;background:white}.badge-top{height:9mm;display:flex;justify-content:space-between;align-items:flex-start}.badge-top img{width:20mm;height:7mm;object-fit:contain;object-position:right top;margin-left:auto}.badge-role{font-size:8pt;font-weight:800;color:white;padding:1.3mm 2.5mm;border-radius:1mm;letter-spacing:.4pt;background:#101828}.badge-role.staff{background:#35b6c0}.badge-person{position:absolute;left:4.5mm;right:4.5mm;top:14mm;bottom:5mm;display:flex;flex-direction:column;justify-content:center}.badge-academic{font-size:8pt;font-weight:600;color:#526074;line-height:1.1;margin-bottom:.6mm}.badge-name{font-size:14pt;font-weight:800;line-height:1.08;overflow-wrap:normal;hyphens:auto;max-height:13mm;overflow:hidden}.badge-name.long{font-size:12pt}.badge-name.very-long{font-size:10.5pt}.badge-company{font-size:9pt;color:#5e6877;line-height:1.15;margin-top:2mm;overflow-wrap:anywhere;max-height:7mm;overflow:hidden}.badge-accent{position:absolute;left:4.5mm;right:4.5mm;bottom:2.7mm;height:.8mm;background:#35b6c0}.badge-accent.speaker{background:#101828}.empty{padding:0}.empty .badge-accent{display:none}@media screen{body{background:#e5e7eb}.sheet{margin:12px auto;background:white;box-shadow:0 3px 15px #0002}}@media print{.sheet{margin:0}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>${pages.map(p=>`<section class="sheet">${p.map(badgeMarkup).join('')}</section>`).join('')}</body></html>`;const w=window.open('','_blank');if(!w){alert('Bitte Pop-ups für diese Seite erlauben, damit der Druckbogen geöffnet werden kann.');return}w.document.open();w.document.write(html);w.document.close();w.focus();};
+
+async function initAuth(){let cfg=window.WPS_CONFIG||{};if(!cfg.SUPABASE_URL||!cfg.SUPABASE_PUBLISHABLE_KEY||!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(cfg.SUPABASE_URL)||!/^https:\/\/ntdmxcrniqdxwqskjbls\.supabase\.co\/?$/i.test(cfg.SUPABASE_URL)||location.hostname!=='michael-brosius.github.io'||!location.pathname.startsWith('/wps-event-anmeldungen/')){$('setup').classList.remove('hidden');$('setup').textContent='Sicherheitsstopp: Bitte die Produktiv-Adresse und die config.js mit dem produktiven Supabase-Projekt prüfen. Die Anmeldung ist bis dahin gesperrt.';return}db=window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});try{const u=new URL(window.location.href);const code=u.searchParams.get('code');if(code){const {error}=await db.auth.exchangeCodeForSession(code);if(error)console.error('Code exchange:',error);u.searchParams.delete('code');history.replaceState({},document.title,u.pathname+u.search)}else if(location.hash.includes('access_token=')){const hp=new URLSearchParams(location.hash.slice(1));const access_token=hp.get('access_token'),refresh_token=hp.get('refresh_token');if(access_token&&refresh_token){const {error}=await db.auth.setSession({access_token,refresh_token});if(error)console.error('Hash session:',error);history.replaceState({},document.title,location.pathname+location.search)}}}catch(e){console.error('Auth redirect:',e)}let {data:{session}}=await db.auth.getSession();await applySession(session);db.auth.onAuthStateChange(async(_event,session)=>{await applySession(session)})}
+async function applySession(session){
+ currentUser=session?.user||null;currentRole=null;
+ const allowed=!!currentUser?.email?.toLowerCase().endsWith('@wps.de');
+ $('app').classList.add('hidden');$('loginBox').classList.toggle('hidden',!!currentUser);$('logoutBox').classList.toggle('hidden',!currentUser);
+ $('userLabel').textContent=currentUser?currentUser.email:'nicht angemeldet';
+ $('roleLabel').classList.add('hidden');$('usersBtn').classList.add('hidden');
+ if(!allowed){if(currentUser)$('userLabel').textContent+=' · Kein WPS-Zugang';return}
+ const {data,error}=await db.from('user_roles').select('role').eq('user_id',currentUser.id).maybeSingle();
+ if(error||!data?.role){$('app').classList.add('hidden');$('userLabel').textContent+=' · Rolle fehlt / nicht lesbar';return}
+ currentRole=data.role;
+ $('roleLabel').textContent=({admin:'Administrator',accounting:'Buchhaltung',event_team:'Event-Team'})[currentRole]||currentRole;
+ $('app').classList.remove('hidden');updateStatsVisibility();$('mailFilter').classList.toggle('hidden',!isAdmin());document.querySelectorAll('.mail-column').forEach(el=>el.classList.toggle('hidden',!isAdmin()));$('roleLabel').classList.remove('hidden');$('usersBtn').classList.add('hidden');$('export').classList.toggle('hidden',!isAdmin());updateImportVisibility();$('addParticipant').classList.toggle('hidden',!isAdmin());
+ ['restoreBtn','clear'].forEach(id=>$(id).classList.toggle('hidden',!isAdmin()));
+ await load();
+}
+async function showUsers(){if(!isAdmin())return;$('usersModal').classList.remove('hidden');$('usersList').textContent='Benutzer werden geladen …';const {data,error}=await db.rpc('event_list_users');if(error){$('usersList').textContent='Benutzer konnten nicht geladen werden: '+error.message;return}const table=document.createElement('table');table.innerHTML='<thead><tr><th>E-Mail</th><th>Rolle</th><th>Ändern</th></tr></thead><tbody></tbody>';for(const u of data||[]){const tr=document.createElement('tr'),email=document.createElement('td'),role=document.createElement('td'),action=document.createElement('td'),select=document.createElement('select'),btn=document.createElement('button');email.textContent=u.email;for(const [v,label] of [['admin','Administrator'],['accounting','Buchhaltung'],['event_team','Event-Team']]){let o=document.createElement('option');o.value=v;o.textContent=label;select.appendChild(o)}select.value=u.role;const self=u.user_id===currentUser.id;select.disabled=self;btn.textContent='Speichern';btn.disabled=self;btn.className='secondary';btn.onclick=async()=>{if(!confirm('Rolle für '+u.email+' ändern?'))return;btn.disabled=true;const {error}=await db.rpc('event_set_user_role',{target_user_id:u.user_id,new_role:select.value});if(error){alert('Rollenänderung fehlgeschlagen: '+error.message);btn.disabled=false;return}alert('Rolle gespeichert. Die Person muss die Seite neu laden.');await showUsers()};role.appendChild(select);action.appendChild(btn);tr.append(email,role,action);table.querySelector('tbody').appendChild(tr)}$('usersList').replaceChildren(table)}
+$('usersBtn').onclick=showUsers;$('usersClose').onclick=()=>$('usersModal').classList.add('hidden');
+
+$('loginBtn').onclick=async()=>{let email=$('loginEmail').value.trim().toLowerCase(),password=$('loginPassword').value;if(!email.endsWith('@wps.de')){alert('Bitte eine @wps.de-Adresse verwenden.');return}if(!password){alert('Bitte Passwort eingeben.');return}if(!db?.auth){alert('Die produktive Supabase-Verbindung ist nicht eingerichtet. Bitte den Hinweis oben auf der Seite prüfen und die Produktiv-config.js kontrollieren.');return}const btn=$('loginBtn');btn.disabled=true;try{const {error}=await db.auth.signInWithPassword({email,password});if(error){alert('Anmeldung fehlgeschlagen: '+error.message);return}$('loginPassword').value=''}catch(e){console.error('Anmeldung:',e);alert('Anmeldung technisch fehlgeschlagen. Bitte Browser-Konsole prüfen.')}finally{btn.disabled=false}};$('passwordToggle').onclick=()=>{const p=$('loginPassword'),show=p.type==='password';p.type=show?'text':'password';$('eyeIcon').innerHTML=show?'<path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 4l16 16" fill="none" stroke="currentColor" stroke-width="2"/>':'<path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>';$('passwordToggle').setAttribute('aria-label',show?'Passwort ausblenden':'Passwort anzeigen');$('passwordToggle').title=show?'Passwort ausblenden':'Passwort anzeigen'};$('loginPassword').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()});$('changePasswordBtn').onclick=()=>{$('pwCurrent').value='';$('pwNew').value='';$('pwRepeat').value='';$('passwordModal').classList.remove('hidden');setTimeout(()=>$('pwCurrent').focus(),0)};$('pwCancel').onclick=()=>{$('passwordModal').classList.add('hidden')};$('passwordModal').addEventListener('click',e=>{if(e.target.id==='passwordModal')$('passwordModal').classList.add('hidden')});$('pwSave').onclick=async()=>{const current=$('pwCurrent').value,newPw=$('pwNew').value,repeat=$('pwRepeat').value;if(!current||!newPw||!repeat){alert('Bitte alle Passwortfelder ausfüllen.');return}if(newPw!==repeat){alert('Die neuen Passwörter stimmen nicht überein.');return}if(newPw.length<8){alert('Das neue Passwort muss mindestens 8 Zeichen lang sein.');return}const {data:{user}}=await db.auth.getUser();if(!user?.email){alert('Benutzer konnte nicht ermittelt werden.');return}$('pwSave').disabled=true;const {error:verifyError}=await db.auth.signInWithPassword({email:user.email,password:current});if(verifyError){$('pwSave').disabled=false;alert('Das aktuelle Passwort ist nicht korrekt.');return}const {error:updateError}=await db.auth.updateUser({password:newPw});$('pwSave').disabled=false;if(updateError){alert('Passwort konnte nicht geändert werden: '+updateError.message);return}$('passwordModal').classList.add('hidden');$('pwCurrent').value='';$('pwNew').value='';$('pwRepeat').value='';alert('Dein Passwort wurde erfolgreich geändert.')};$('pwRepeat').addEventListener('keydown',e=>{if(e.key==='Enter')$('pwSave').click()});$('logoutBtn').onclick=async()=>{await db.auth.signOut()};initAuth();
+</script></main></body></html>
