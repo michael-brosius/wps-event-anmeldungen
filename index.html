@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0070)file:///Users/michaelbrosius/Downloads/WPS_Event_Anmeldungen_v2_2.html -->
-<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WPS Event-Anmeldungen – Version 4.7.0</title><style>
+<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WPS Event-Anmeldungen – Version 4.7.3 TEST</title><style>
 :root{--navy:#042649;--cyan:#03C2CA;--bg:#f3f5f7;--line:#dce2e8;--muted:#6b7d90;--warn:#fff3cd;--good:#e8f7ef}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--navy)}header{background:var(--navy);color:#fff;padding:22px 28px}header h1{margin:0 0 4px;font-size:25px}header p{margin:0;color:#dbe5ee}main{max-width:1550px;margin:auto;padding:22px}.drop{background:#fff;border:2px dashed #9aabb9;border-radius:14px;padding:28px;text-align:center;cursor:pointer}.drop.over{border-color:var(--cyan);background:#eefcfd}.drop strong{font-size:19px}.drop small{display:block;color:var(--muted);margin-top:7px}input[type=file]{display:none}.actions,.filters{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.filters{background:#fff;padding:11px;border:1px solid var(--line);border-radius:9px}button{border:0;border-radius:6px;padding:9px 13px;font-weight:700;cursor:pointer;background:var(--cyan);color:#fff}button.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}button.danger{background:#fff;color:#a22;border:1px solid #e0b8b8}.cards{display:grid;grid-template-columns:repeat(11,minmax(105px,1fr));gap:9px;margin:14px 0}.card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px}.card b{display:block;font-size:23px}.card span{font-size:11px;color:var(--muted)}select,input[type=search]{padding:8px;border:1px solid var(--line);border-radius:6px;background:#fff}.status{font-size:13px;color:var(--muted);margin:8px 0}.tablewrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:9px;max-height:59vh}table{border-collapse:collapse;width:100%;font-size:12.5px;white-space:nowrap}th,td{padding:8px 9px;border-bottom:1px solid #edf0f3;text-align:left}th{position:sticky;top:0;background:#edf3f6;z-index:2}tr.new{background:var(--good)}tr.dup{background:var(--warn)}td.note{max-width:260px;white-space:normal}.pill{display:inline-block;padding:3px 7px;border-radius:12px;background:#eaf7f8}.tag{font-size:11px;padding:2px 6px;border-radius:9px;background:#eef1f4}.help{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0;font-size:13px}.help b{color:var(--cyan)}@media(max-width:1000px){.cards{grid-template-columns:repeat(4,1fr)}}
 .authbar{display:flex;gap:10px;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin-bottom:14px}.authbar input{padding:8px;border:1px solid var(--line);border-radius:6px;min-width:260px}.password-wrap{position:relative;display:inline-flex;align-items:center}.password-wrap input{padding-right:40px}.password-toggle{position:absolute;right:7px;background:transparent!important;border:0!important;color:#53606d!important;padding:4px!important;min-width:0!important;cursor:pointer;font-size:18px;line-height:1}.password-toggle:hover{opacity:.7}.hidden{display:none!important}.setup{background:#fff3cd;border:1px solid #ead28a;border-radius:9px;padding:12px;margin-bottom:14px}.sync{font-size:12px;color:var(--muted)}
 .editbtn{padding:5px 9px;font-size:11px}.cancelled{opacity:.58;background:#fafafa}.status-cancelled{background:#fdecec;color:#9b2c2c}.modalback{position:fixed;inset:0;background:rgba(4,38,73,.48);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}.modal{background:#fff;border-radius:12px;width:min(900px,96vw);max-height:90vh;overflow:auto;padding:20px;box-shadow:0 18px 50px rgba(0,0,0,.25)}.modal h2{margin:0 0 15px}.formgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.wide{grid-column:span 3}.field label{font-size:12px;font-weight:700;color:var(--muted)}.field input,.field select,.field textarea{padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit}.field textarea{min-height:75px;resize:vertical}.modalactions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}@media(max-width:700px){.formgrid{grid-template-columns:1fr}.field.wide{grid-column:span 1}}
@@ -122,7 +122,27 @@ th.sortable{cursor:pointer;user-select:none;white-space:nowrap}th.sortable:hover
 .seat-placement-counts span{display:block;font-size:10px;color:#536475}
 .seat-placement-progress{height:7px;border-radius:8px;background:#dce7ec;overflow:hidden;margin-top:9px}
 .seat-placement-progress>div{height:100%;background:#159b83;transition:width .2s ease}
-</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 4.7.0</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
+
+/* v4.7.1 TEST: separate full-viewport planning workspace; same underlying seating DOM and Supabase data */
+body.seat-fullscreen{overflow:hidden!important}
+body.seat-fullscreen #seatingPanel{position:fixed!important;inset:0!important;z-index:10000!important;margin:0!important;border:0!important;border-radius:0!important;padding:10px 14px!important;display:flex!important;flex-direction:column!important;background:#f6f9fb!important;overflow:hidden!important}
+body.seat-fullscreen #seatingPanel>.seat-head{flex:0 0 auto}
+body.seat-fullscreen #seatingPanel>.seat-tools{flex:0 0 auto;margin:5px 0!important}
+body.seat-fullscreen #seatingPanel>.seat-notice,body.seat-fullscreen #seatingPanel>.seat-map-hint{display:none!important}
+body.seat-fullscreen #seatingPanel>.seat-zoom{flex:0 0 auto;margin:5px 0!important}
+body.seat-fullscreen #seatLayout{flex:1 1 auto!important;min-height:0!important;display:grid!important;grid-template-columns:225px minmax(0,1fr) 290px!important;overflow:hidden!important;gap:9px!important}
+body.seat-fullscreen #seatLayout .seat-people,body.seat-fullscreen #seatLayout .seat-detail{display:block!important;height:100%!important;max-height:none!important;min-height:0!important;overflow:auto!important}
+body.seat-fullscreen #seatLayout .seat-map-scroll{height:100%!important;min-height:0!important;max-height:none!important;overflow:auto!important}
+body.seat-fullscreen #seatLayout.wide-map{grid-template-columns:1fr!important}
+body.seat-fullscreen #seatLayout.wide-map .seat-people,body.seat-fullscreen #seatLayout.wide-map .seat-detail{display:none!important}
+body.seat-fullscreen #seatCancellationWarning{flex:0 0 auto;max-height:90px;overflow:auto}
+#seatCancellationWarning .seat-warning-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#seatCancellationWarning .seat-warning-toggle{font-size:12px;padding:5px 10px;white-space:nowrap;background:#fff;border:1px solid #d97706;color:#713f12;border-radius:6px;cursor:pointer}
+#seatCancellationWarning .seat-warning-detail[hidden]{display:none!important}
+body.seat-fullscreen #seatCancellationWarning{padding:5px 10px!important;margin:3px 0!important;max-height:none!important;overflow:visible!important}
+body.seat-fullscreen #seatCancellationWarning .seat-warning-detail:not([hidden]){max-height:95px;overflow:auto}
+@media(max-width:950px){body.seat-fullscreen #seatLayout{grid-template-columns:165px minmax(0,1fr) 200px!important}}
+</style></head><body><header><h1>WPS Event-Anmeldungen <span style="font-size:14px;font-weight:normal">Version 4.7.3 TEST</span></h1><p>software@work 2026 · roads@work Community Workshop · gemeinsam &amp; zentral</p></header><main>
 <div id="setup" class="setup hidden"><b>Einrichtung erforderlich:</b> Bitte in <code>config.js</code> SUPABASE_URL und SUPABASE_PUBLISHABLE_KEY eintragen.</div>
 <div class="authbar"><div><strong>WPS Event-Team</strong> <span id="userLabel" class="sync">nicht angemeldet</span> <span id="roleLabel" class="tag hidden"></span></div><div id="loginBox"><input id="loginEmail" type="email" placeholder="name@wps.de" autocomplete="username"><span class="password-wrap"><input id="loginPassword" type="password" placeholder="Passwort" autocomplete="current-password"><button type="button" id="passwordToggle" class="password-toggle" aria-label="Passwort anzeigen" title="Passwort anzeigen"><svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></span><button id="loginBtn">Anmelden</button></div><div id="logoutBox" class="hidden"><span id="syncState" class="sync">Synchronisiert</span> <button class="secondary hidden" id="usersBtn">Benutzerverwaltung</button> <button class="secondary" id="changePasswordBtn">Passwort ändern</button> <button class="secondary" id="logoutBtn">Abmelden</button></div></div>
 <div id="app" class="hidden">
@@ -130,7 +150,7 @@ th.sortable{cursor:pointer;user-select:none;white-space:nowrap}th.sortable:hover
 <div class="actions hidden" id="seatAccess"><button id="toggleSeating" class="secondary" type="button">◉ Dinner-Sitzplan (Admin)</button></div>
 <section id="seatingPanel" class="seat-panel hidden"><div class="seat-head"><div><h2 style="margin:0 0 4px">Dinner-Sitzplan · Parkview</h2><span class="seat-notice">Grundlage: Floorplan &amp; Tableplan vom 01.11.2026</span></div><button class="secondary" id="closeSeating">Schließen</button></div>
 <div id="seatCancellationWarning" class="hidden" role="alert" aria-live="polite" style="border:2px solid #d97706;background:#fff8e9;color:#713f12;border-radius:10px;padding:13px 16px;margin:14px 0;font-size:13px"></div>
-<div class="seat-tools"><button id="seatReload" class="secondary">Zentralen Stand laden</button><button id="seatSave">Sitzplan zentral speichern</button><button id="seatAddTable" class="secondary">+ Tisch</button><button id="seatPrint" class="secondary">Tischlisten als PDF</button><button id="seatPrintMap" class="secondary">Raumplan als PDF</button><button id="seatPrintAlpha" class="secondary">Alphabetische Gästeliste (A4)</button><span id="seatState" class="seat-notice"></span></div>
+<div class="seat-tools"><button id="seatReload" class="secondary">Zentralen Stand laden</button><button id="seatSave">Sitzplan zentral speichern</button><button id="seatAddTable" class="secondary">+ Tisch</button><button id="seatFullscreen" class="secondary" type="button">⛶ Vollbild-Sitzplan öffnen</button><button id="seatPrint" class="secondary">Tischlisten als PDF</button><button id="seatPrintMap" class="secondary">Raumplan als PDF</button><button id="seatPrintAlpha" class="secondary">Alphabetische Gästeliste (A4)</button><span id="seatState" class="seat-notice"></span></div>
 <p class="seat-notice">Gäste per Drag &amp; Drop zuordnen oder verschieben. Ein Klick auf einen belegten Platz zeigt die Gästeinformationen, ohne die Sitzordnung zu verändern. Tische lassen sich an ihrer türkisfarbenen Tischfläche mit der Maus verschieben. Die Tischform bestimmt die tatsächliche Sitzanordnung (rechteckig: gegenüber, rund: im Kreis). Bitte zunächst alle Namenszuordnungen prüfen.</p>
 <div class="seat-map-hint">Alle Gäste direkt am Tisch sehen. Links Gast auswählen, auf einen Platz klicken. Tische an der türkisfarbenen Fläche verschieben. Zoom und Vollansicht oberhalb des Plans.</div>
 <div class="seat-zoom"><button class="secondary" type="button" id="seatZoomOut">− Verkleinern</button><strong id="seatZoomLabel">70 %</strong><button class="secondary" type="button" id="seatZoomIn">+ Vergrößern</button><button class="secondary" type="button" id="seatZoomFit">Alles zeigen</button><button class="secondary" type="button" id="seatWideMap">Nur Raumplan</button><span class="seat-notice">Namen stehen direkt an den Sitzplätzen · Auf freie Fläche klicken und ziehen zum Bewegen · Mausrad zum Scrollen · Strg + Mausrad zum Zoomen</span></div><div class="seat-layout" id="seatLayout"><div class="seat-people"><b>Noch nicht platzierte Dinner-Gäste</b><div id="seatPlacementStats" class="seat-placement-stats" aria-live="polite"></div><input id="seatSearch" type="search" placeholder="Alle Teilnehmer suchen …"><div id="seatSearchResults" aria-live="polite"></div><div id="seatUnassigned"></div><hr><b>Zuordnungen prüfen</b><div id="seatWarnings" class="seat-notice"></div></div><div class="seat-map-scroll"><div class="seat-map" id="seatMap"></div></div><div class="seat-detail"><div class="seat-head"><h3 id="seatDetailTitle">Tisch auswählen</h3><div id="seatDetailControls"></div></div><div class="seat-detail-grid" id="seatDetailGrid"></div></div></div></section>
@@ -1018,12 +1038,16 @@ function seatResolve(){
 }
 // Remove seats for uniquely identified guests who are cancelled OR no longer booked for dinner.
 // Missing/ambiguous registrations remain visible for manual verification.
+let seatWarningExpanded=true;
 function seatCancellationWarningRender(){
  const el=$('seatCancellationWarning');if(!el)return;
  el.classList.toggle('hidden',!seatCancelledSinceSave.length);
  if(!seatCancelledSinceSave.length){el.innerHTML='';return;}
- el.innerHTML=`<strong>⚠ Sitzplan: ${seatCancelledSinceSave.length} ${seatCancelledSinceSave.length===1?'Platz wurde':'Plätze wurden'} durch Abmeldungen oder Dinner-Absagen frei</strong><div style="margin:6px 0">Seit dem letzten zentral gespeicherten Stand wurden folgende Gäste eindeutig als abgemeldet oder ohne aktive Dinner-Buchung erkannt. Bitte den Sitzplan prüfen und anschließend zentral speichern.</div><ul style="margin:6px 0 8px;padding-left:20px">${seatCancelledSinceSave.map(a=>`<li>${esc(a.name)} – Tisch ${Number(a.table)}, Platz ${Number(a.seat)}</li>`).join('')}</ul><strong>Änderungen noch nicht zentral gespeichert.</strong>`;
+ const title=`⚠ Sitzplan: ${seatCancelledSinceSave.length} ${seatCancelledSinceSave.length===1?'Platz wurde':'Plätze wurden'} durch Abmeldungen oder Dinner-Absagen frei`;
+ el.innerHTML=`<div class="seat-warning-head"><strong>${title}</strong><button class="seat-warning-toggle" type="button" aria-expanded="${seatWarningExpanded}" aria-controls="seatWarningDetail">${seatWarningExpanded?'Details einklappen':'Details anzeigen'}</button></div><div id="seatWarningDetail" class="seat-warning-detail" ${seatWarningExpanded?'':'hidden'}><div style="margin:6px 0">Seit dem letzten zentral gespeicherten Stand wurden folgende Gäste eindeutig als abgemeldet oder ohne aktive Dinner-Buchung erkannt. Bitte den Sitzplan prüfen und anschließend zentral speichern.</div><ul style="margin:6px 0 8px;padding-left:20px">${seatCancelledSinceSave.map(a=>`<li>${esc(a.name)} – Tisch ${Number(a.table)}, Platz ${Number(a.seat)}</li>`).join('')}</ul><strong>Änderungen noch nicht zentral gespeichert.</strong></div>`;
+ el.querySelector('.seat-warning-toggle').onclick=()=>{seatWarningExpanded=!seatWarningExpanded;seatCancellationWarningRender();};
 }
+
 function seatReconcileCancellations(){
  if(!seatPlan)return 0;
  const removed=[];
@@ -1217,28 +1241,26 @@ async function seatRoomPdf(){
   const clean=v=>String(v??'').replace(/[\u0000-\u001f]/g,' ').replace(/[\u2010-\u2015]/g,'-').trim();
   const colors=a=>{const r=seatGuest(a),m=String(r?.meal||a?.meal||'').toLowerCase();return m.includes('fisch')?[140,229,241]:m.includes('veget')||m.includes('vegan')?[185,236,157]:m.includes('fleisch')?[198,183,239]:[255,165,150]};
   const tables=[...seatPlan.tables];if(!tables.length)throw Error('Keine Tische vorhanden.');
-  // Drucklayout: fünf Tisch-Inseln je Reihe, drei Reihen bei 15 Tischen.
-  // Die Reihenfolge orientiert sich an den gespeicherten Raumkoordinaten.
-  // Feste Insel-Abstände verhindern Überlagerungen von Namenskreisen.
-  const ordered=[...tables].sort((a,b)=>(Number(a.y)||0)-(Number(b.y)||0));
-  const cols=5, rows=Math.ceil(ordered.length/cols), cellW=78, cellH=rows<=3?77:220/rows;
-  const centerById=new Map();
-  for(let row=0;row<rows;row++){
-   const group=ordered.slice(row*cols,(row+1)*cols).sort((a,b)=>(Number(a.x)||0)-(Number(b.x)||0));
-   const baseX=210-(group.length-1)*cellW/2;
-   group.forEach((t,i)=>centerById.set(t.id,{x:baseX+i*cellW,y:65+row*cellH}));
-  }
-  const mapX=(x,id)=>centerById.get(id).x;
-  const mapY=(y,id)=>centerById.get(id).y;
+  // v4.7.1: identical relative table coordinates as in the interactive room map.
+  // No sorting or automatic reflow: the hotel PDF reflects the saved table positions.
+  const xs=tables.map(t=>Number(t.x)||0),ys=tables.map(t=>Number(t.y)||0);
+  const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+  const spanX=Math.max(1,maxX-minX),spanY=Math.max(1,maxY-minY);
+  // Preserve aspect ratio of 4800x3000 map; leave margins for seats and labels.
+  const scale=Math.min(345/spanX,190/spanY);
+  const mapWidth=spanX*scale,mapHeight=spanY*scale;
+  const offsetX=210-mapWidth/2,offsetY=143-mapHeight/2;
+  const mapX=x=>offsetX+((Number(x)||0)-minX)*scale;
+  const mapY=y=>offsetY+((Number(y)||0)-minY)*scale;
   // Kreisförmige Sitzplätze mit horizontal lesbaren Namen.
   const R=7.9,rad=Math.PI/180;
   const rot=(x,y,deg)=>({x:x*Math.cos(deg*rad)-y*Math.sin(deg*rad),y:x*Math.sin(deg*rad)+y*Math.cos(deg*rad)});
   doc.setTextColor(...navy);doc.setFont('helvetica','bold');doc.setFontSize(13);
   doc.text('Dinner | Sitzplan',12,13);
-  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text('software@work 2026  |  Parkview Restaurant  |  05.11.2026',12,19);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.text('software@work 2026  |  Dinner  |  05.11.2026  |  Tischpositionen wie im digitalen Raumplan',12,19);
   doc.setDrawColor(224,228,232);doc.line(12,23,408,23);
   for(const t of tables){
-   const cx=mapX(t.x,t.id),cy=mapY(t.y,t.id),cap=Math.max(1,Number(t.capacity)||1),angle=Number(t.rotation)||0;
+   const cx=mapX(t.x),cy=mapY(t.y),cap=Math.max(1,Number(t.capacity)||1),angle=Number(t.rotation)||0;
    const isRound=t.shape==='round';
    // Tischplatten werden wie in der Referenz als schlichte helle Konturen gezeichnet.
    doc.setDrawColor(218,219,224);doc.setLineWidth(.38);doc.setFillColor(255,255,255);
@@ -1298,7 +1320,7 @@ async function seatRoomPdf(){
    doc.setTextColor(...navy);doc.setFont('helvetica','bold');doc.setFontSize(13);
    doc.text('Dinner | Tisch- und Gästeliste',12,13);
    doc.setFont('helvetica','normal');doc.setFontSize(8);
-   doc.text('software@work 2026  |  Parkview Restaurant  |  05.11.2026',12,19);
+   doc.text('software@work 2026  |  Dinner  |  05.11.2026  |  Tischpositionen wie im digitalen Raumplan',12,19);
    doc.setDrawColor(224,228,232);doc.line(12,23,408,23);
    doc.setFontSize(7);doc.setTextColor(...ink);
    doc.text('Platz',12,31);doc.text('Name',26,31);doc.text('Firma',81,31);doc.text('Menü',147,31);doc.text('Allergie / Hinweis',171,31);
@@ -1477,14 +1499,18 @@ async function seatDownloadPdf(){
 }
 
 let seatZoom=1;
-function seatApplyZoom(v){seatZoom=Math.max(.45,Math.min(1.65,v));$('seatMap').style.zoom=seatZoom;$('seatZoomLabel').textContent=Math.round(seatZoom*100)+' %';void 0}
+function seatApplyZoom(v){seatZoom=Math.max(.12,Math.min(1.65,v));$('seatMap').style.zoom=seatZoom;$('seatZoomLabel').textContent=Math.round(seatZoom*100)+' %';void 0}
 $('seatZoomIn').onclick=()=>seatApplyZoom(seatZoom+.1);
 $('seatZoomOut').onclick=()=>seatApplyZoom(seatZoom-.1);
 
 
-$('seatZoomFit').onclick=()=>{const width=$('seatMap').parentElement.clientWidth;seatApplyZoom(Math.max(.25,Math.min(1,width/4800)))};
+$('seatZoomFit').onclick=()=>{const sc=$('seatMap').parentElement;const width=sc.clientWidth,height=sc.clientHeight;seatApplyZoom(Math.max(.12,Math.min(1,width/4800,height/3000)));sc.scrollLeft=0;sc.scrollTop=0};
 
 $('seatWideMap').onclick=()=>{const wide=$('seatLayout').classList.toggle('wide-map');$('seatWideMap').textContent=wide?'Gästeliste & Details zeigen':'Nur Raumplan';if(wide)$('seatZoomFit').click()};
+function seatToggleFullscreen(force){const enable=typeof force==='boolean'?force:!document.body.classList.contains('seat-fullscreen');document.body.classList.toggle('seat-fullscreen',enable);$('seatFullscreen').textContent=enable?'⤢ Vollbild schließen':'⛶ Vollbild-Sitzplan öffnen';$('seatFullscreen').setAttribute('aria-pressed',String(enable));if(enable){$('seatLayout').classList.remove('wide-map');$('seatWideMap').textContent='Nur Raumplan';}requestAnimationFrame(()=>{if(enable){seatApplyZoom(.30);const sc=$('seatMap').parentElement;sc.scrollLeft=0;sc.scrollTop=0}else $('seatZoomFit').click()})}
+$('seatFullscreen').onclick=()=>seatToggleFullscreen();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('seat-fullscreen'))seatToggleFullscreen(false)});
+
 seatApplyZoom(.85);
 // Pan: Ziehen auf freiem Hintergrund verschiebt den sichtbaren Kartenausschnitt.
 (function(){
@@ -1507,7 +1533,7 @@ seatApplyZoom(.85);
  },{passive:false});
 })();
 $('toggleSeating').onclick=async()=>{$('seatingPanel').classList.toggle('hidden');if(!$('seatingPanel').classList.contains('hidden')){await seatLoad();$('seatingPanel').scrollIntoView({behavior:'smooth'});const sc=$('seatMap').parentElement;sc.scrollLeft=0;sc.scrollTop=130}};
-$('closeSeating').onclick=()=>{$('seatingPanel').classList.add('hidden')};$('seatReload').onclick=()=>{if(seatDirty&&!confirm('Ungespeicherte Änderungen verwerfen?'))return;seatLoad()};$('seatSave').onclick=seatSave;$('seatSearch').oninput=seatRender;$('seatPrint').onclick=seatDownloadPdf;$('seatPrintMap').onclick=seatRoomPdf;$('seatPrintAlpha').onclick=seatAlphabeticalPdf;$('seatAddTable').onclick=()=>{if(!seatPlan)return;const id=Math.max(0,...seatPlan.tables.map(t=>t.id))+1;seatPlan.tables.push({id,shape:'round',capacity:8,x:50,y:50});seatSelected=id;seatChange()};
+$('closeSeating').onclick=()=>{if(document.body.classList.contains('seat-fullscreen'))seatToggleFullscreen(false);$('seatingPanel').classList.add('hidden')};$('seatReload').onclick=()=>{if(seatDirty&&!confirm('Ungespeicherte Änderungen verwerfen?'))return;seatLoad()};$('seatSave').onclick=seatSave;$('seatSearch').oninput=seatRender;$('seatPrint').onclick=seatDownloadPdf;$('seatPrintMap').onclick=seatRoomPdf;$('seatPrintAlpha').onclick=seatAlphabeticalPdf;$('seatAddTable').onclick=()=>{if(!seatPlan)return;const id=Math.max(0,...seatPlan.tables.map(t=>t.id))+1;seatPlan.tables.push({id,shape:'round',capacity:8,x:50,y:50});seatSelected=id;seatChange()};
 
 async function initAuth(){let cfg=window.WPS_CONFIG||{};if(!cfg.SUPABASE_URL||!cfg.SUPABASE_PUBLISHABLE_KEY||!/^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(cfg.SUPABASE_URL)||!/^https:\/\/ntdmxcrniqdxwqskjbls\.supabase\.co\/?$/i.test(cfg.SUPABASE_URL)||location.hostname!=='michael-brosius.github.io'||!location.pathname.startsWith('/wps-event-anmeldungen/')){$('setup').classList.remove('hidden');$('setup').textContent='Sicherheitsstopp: Bitte die Produktiv-Adresse und die config.js mit dem produktiven Supabase-Projekt prüfen. Die Anmeldung ist bis dahin gesperrt.';return}db=window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});try{const u=new URL(window.location.href);const code=u.searchParams.get('code');if(code){const {error}=await db.auth.exchangeCodeForSession(code);if(error)console.error('Code exchange:',error);u.searchParams.delete('code');history.replaceState({},document.title,u.pathname+u.search)}else if(location.hash.includes('access_token=')){const hp=new URLSearchParams(location.hash.slice(1));const access_token=hp.get('access_token'),refresh_token=hp.get('refresh_token');if(access_token&&refresh_token){const {error}=await db.auth.setSession({access_token,refresh_token});if(error)console.error('Hash session:',error);history.replaceState({},document.title,location.pathname+location.search)}}}catch(e){console.error('Auth redirect:',e)}let {data:{session}}=await db.auth.getSession();await applySession(session);db.auth.onAuthStateChange(async(_event,session)=>{await applySession(session)})}
 async function applySession(session){
